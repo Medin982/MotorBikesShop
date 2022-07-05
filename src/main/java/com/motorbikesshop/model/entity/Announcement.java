@@ -2,7 +2,6 @@ package com.motorbikesshop.model.entity;
 
 import com.motorbikesshop.model.enums.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,9 +11,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name ="announcements")
 public class Announcement extends BaseEntity{
-
-    @ManyToOne(optional = false)
-    private Brand brand;
 
     @ManyToOne(optional = false)
     private Model model;
@@ -48,7 +44,7 @@ public class Announcement extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ConditionType condition;
+    private ConditionType conditions;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -57,16 +53,29 @@ public class Announcement extends BaseEntity{
     @ManyToOne(optional = false)
     private Address address;
 
+    @ManyToOne(optional = false)
+    private UserEntity seller;
+
     @CreatedDate
-    @Column(nullable = false)
     private LocalDateTime created;
 
-    public Brand getBrand() {
-        return brand;
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    public UserEntity getSeller() {
+        return seller;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public void setSeller(UserEntity seller) {
+        this.seller = seller;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Model getModel() {
@@ -142,11 +151,11 @@ public class Announcement extends BaseEntity{
     }
 
     public ConditionType getCondition() {
-        return condition;
+        return conditions;
     }
 
     public void setCondition(ConditionType condition) {
-        this.condition = condition;
+        this.conditions = condition;
     }
 
     public ColorType getColor() {

@@ -2,11 +2,13 @@ package com.motorbikesshop.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     @Column(nullable = false, name = "first_name")
     private String firstName;
@@ -22,6 +24,17 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "seller", targetEntity = Announcement.class)
+    private List<Announcement> announcements;
+
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
+
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
+    }
 
     public String getFirstName() {
         return firstName;
