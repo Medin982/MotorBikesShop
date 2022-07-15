@@ -1,9 +1,6 @@
 package com.motorbikesshop.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -27,6 +24,17 @@ public class UserEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "seller", targetEntity = Announcement.class)
     private List<Announcement> announcements;
+
+    @ManyToOne
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public List<Announcement> getAnnouncements() {
         return announcements;
