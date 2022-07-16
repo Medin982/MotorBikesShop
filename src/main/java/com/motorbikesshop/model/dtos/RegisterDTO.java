@@ -5,9 +5,9 @@ import com.motorbikesshop.Config.CustomValidation.UniqueEmailValidation;
 
 import javax.validation.constraints.*;
 
-//@IsMatched(
-//        first = "password",
-//        second = "confirmPassword")
+@IsMatched(
+        first = "password",
+        second = "confirmPassword")
 public class RegisterDTO {
 
     @NotBlank(message = "First Name cannot be empty!")

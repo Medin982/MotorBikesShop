@@ -7,7 +7,7 @@ import org.springframework.beans.PropertyAccessorFactory;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class IsMatchedImpl implements ConstraintValidator<IsMatched, String> {
+public class IsMatchedImpl implements ConstraintValidator<IsMatched, Object> {
 
     private String first;
     private String second;
@@ -21,7 +21,7 @@ public class IsMatchedImpl implements ConstraintValidator<IsMatched, String> {
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
         BeanWrapper beanWrapper = PropertyAccessorFactory.
                 forBeanPropertyAccess(value);
         Object firstValue = beanWrapper.getPropertyValue(this.first);

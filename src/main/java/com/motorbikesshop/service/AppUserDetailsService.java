@@ -1,7 +1,10 @@
 package com.motorbikesshop.service;
 
+import com.motorbikesshop.model.entity.Role;
 import com.motorbikesshop.model.entity.UserEntity;
 import com.motorbikesshop.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +30,11 @@ public class AppUserDetailsService implements UserDetailsService {
         return User.builder().
                 username(user.getEmail()).
                 password(user.getPassword()).
+                authorities(map(user.getRole())).
                 build();
+    }
+
+    private GrantedAuthority map(Role userRole) {
+        return new SimpleGrantedAuthority("ROLE_" + userRole.getName().name());
     }
 }
