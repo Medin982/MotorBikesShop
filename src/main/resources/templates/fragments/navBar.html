@@ -1,7 +1,7 @@
 <th:block xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
           xmlns:th="http://www.thymeleaf.org">
     <nav class="navbar nav-fill navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand text-warning" href="/">MotorBikes</a>
+        <a class="navbar-brand text-warning" href="/">MotorBike</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,7 @@
                 <th:block sec:authorize="isAnonymous()">
                     <li class="nav-item active">
                         <a class="nav-link" href="/users/login">Login
-<!--                            <span class="sr-only">(current)</span>-->
+                            <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
