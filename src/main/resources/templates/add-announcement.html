@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/head}"></head>
 <body>
 <nav th:include="~{fragments/navBar}"></nav>
@@ -13,40 +14,43 @@
                     <h2 class="text-uppercase text-center mb-5 text-warning">Create an announcement</h2>
 
                     <form th:action="@{/add/announcement}"
-                          th:method="post">
+                          th:method="post"
+                          th:object="${announcementDTO}">
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label class="text-center text-warning font-weight-bold"
-                                       for="Model">Model</label>
-                                <select id="Model"
-                                        name="Model"
+                                       for="brandId">Brand</label>
+                                <select id="brandId"
+                                        th:field="*{brandId}"
+                                        th:errorclass="is-invalid"
                                         class="form-control">
-                                    <option value="">- Select model -</option>
-                                    <!--                                            <option th:each="transmission : ${T(com.example.mobilelele.Models.Entity.Enums.TransmissionEnum).values()}"-->
-                                    <!--                                                    th:text="${transmission}"-->
-                                    <!--                                                    th:value="${transmission}"-->
-                                    <!--                                                    th:selected="${transmission} == *{transmission}">-->
-                                    <!--                                                Transmission type-->
-                                    <!--                                            </option>-->
+                                    <option value="">- Select brand -</option>
+                                    <option th:each="brand : ${brands}"
+                                            th:text="${brand.name}"
+                                            th:value="${brand.id}"
+                                            th:selected="${brand.id} == *{brandId}">
+                                        Brand
+                                    </option>
                                 </select>
                                 <p class="invalid-feedback errors alert alert-danger">
-                                    Transmission type is required.
+                                    Brand is required.
                                 </p>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="text-center text-warning font-weight-bold"
                                        for="transmission">Transmission</label>
                                 <select id="transmission"
-                                        name="transmission"
+                                        th:field="*{transmission}"
+                                        th:errorclass="is-invalid"
                                         class="form-control">
                                     <option value="">- Select transmission type -</option>
-                                    <!--                                            <option th:each="transmission : ${T(com.example.mobilelele.Models.Entity.Enums.TransmissionEnum).values()}"-->
-                                    <!--                                                    th:text="${transmission}"-->
-                                    <!--                                                    th:value="${transmission}"-->
-                                    <!--                                                    th:selected="${transmission} == *{transmission}">-->
-                                    <!--                                                Transmission type-->
-                                    <!--                                            </option>-->
+                                    <option th:each="transmission : ${T(com.motorbikesshop.model.enums.TransmissionType).values()}"
+                                            th:text="${transmission}"
+                                            th:value="${transmission}"
+                                            th:selected="${transmission} == *{transmission}">
+                                        Transmission type
+                                    </option>
                                 </select>
                                 <p class="invalid-feedback errors alert alert-danger">
                                     Transmission type is required.
@@ -56,15 +60,16 @@
                                 <label class="text-center text-warning font-weight-bold"
                                        for="engine">Engine</label>
                                 <select id="engine"
-                                        name="engine"
+                                        th:field="*{engine}"
+                                        th:errorclass="is-invalid"
                                         class="form-control">
                                     <option value="">- Select engine type -</option>
-                                    <!--                                            <option th:each="engine : ${T(com.example.mobilelele.Models.Entity.Enums.EngineEnum).values()}"-->
-                                    <!--                                                    th:text="${engine}"-->
-                                    <!--                                                    th:value="${engine}"-->
-                                    <!--                                                    th:selected="${engine} == *{engine}">-->
-                                    <!--                                                Engine type-->
-                                    <!--                                            </option>-->
+                                    <option th:each="engine : ${T(com.motorbikesshop.model.enums.EngineType).values()}"
+                                            th:text="${engine}"
+                                            th:value="${engine}"
+                                            th:selected="${engine} == *{engine}">
+                                        Engine type
+                                    </option>
                                 </select>
                                 <p class="invalid-feedback errors alert alert-danger">
                                     Engine type is required.
@@ -77,15 +82,16 @@
                                 <label class="text-center text-warning font-weight-bold"
                                        for="category">Category</label>
                                 <select id="category"
-                                        name="category"
+                                        th:field="*{category}"
+                                        th:errorclass="is-invalid"
                                         class="form-control">
                                     <option value="">- Select category type -</option>
-                                    <!--                                            <option th:each="transmission : ${T(com.example.mobilelele.Models.Entity.Enums.TransmissionEnum).values()}"-->
-                                    <!--                                                    th:text="${transmission}"-->
-                                    <!--                                                    th:value="${transmission}"-->
-                                    <!--                                                    th:selected="${transmission} == *{transmission}">-->
-                                    <!--                                                Transmission type-->
-                                    <!--                                            </option>-->
+                                    <option th:each="category : ${T(com.motorbikesshop.model.enums.MotorBikesType).values()}"
+                                            th:text="${category}"
+                                            th:value="${category}"
+                                            th:selected="${category} == *{category}">
+                                        Category type
+                                    </option>
                                 </select>
                                 <p class="invalid-feedback errors alert alert-danger">
                                     Category type is required.
@@ -95,33 +101,35 @@
                                 <label class="text-center text-warning font-weight-bold"
                                        for="condition">Condition</label>
                                 <select id="condition"
-                                        name="transmission"
+                                        th:field="*{condition}"
+                                        th:errorclass="is-invalid"
                                         class="form-control">
                                     <option value="">- Select condition type -</option>
-                                    <!--                                            <option th:each="transmission : ${T(com.example.mobilelele.Models.Entity.Enums.TransmissionEnum).values()}"-->
-                                    <!--                                                    th:text="${transmission}"-->
-                                    <!--                                                    th:value="${transmission}"-->
-                                    <!--                                                    th:selected="${transmission} == *{transmission}">-->
-                                    <!--                                                Transmission type-->
-                                    <!--                                            </option>-->
+                                    <option th:each="condition : ${T(com.motorbikesshop.model.enums.ConditionType).values()}"
+                                            th:text="${condition}"
+                                            th:value="${condition}"
+                                            th:selected="${condition} == *{condition}">
+                                        Condition
+                                    </option>
                                 </select>
                                 <p class="invalid-feedback errors alert alert-danger">
-                                    Condition type is required.
+                                    Condition is required.
                                 </p>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="text-center text-warning font-weight-bold"
                                        for="color">Color</label>
                                 <select id="color"
-                                        name="transmission"
+                                        th:field="*{color}"
+                                        th:errorclass="is-invalid"
                                         class="form-control">
                                     <option value="">- Select color -</option>
-                                    <!--                                            <option th:each="transmission : ${T(com.example.mobilelele.Models.Entity.Enums.TransmissionEnum).values()}"-->
-                                    <!--                                                    th:text="${transmission}"-->
-                                    <!--                                                    th:value="${transmission}"-->
-                                    <!--                                                    th:selected="${transmission} == *{transmission}">-->
-                                    <!--                                                Transmission type-->
-                                    <!--                                            </option>-->
+                                    <option th:each="color : ${T(com.motorbikesshop.model.enums.ColorType).values()}"
+                                            th:text="${color}"
+                                            th:value="${color}"
+                                            th:selected="${color} == *{color}">
+                                        Color type
+                                    </option>
                                 </select>
                                 <p class="invalid-feedback errors alert alert-danger">
                                     Color is required.
@@ -130,22 +138,42 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <label class="text-center text-warning" for="horsePower">Horse power</label>
+                            <div class="col-md-4 mb-3">
+                                <label class="text-center text-warning font-weight-bold" for="dateOfManufacturer">
+                                    Date of Manufacturer</label>
+                                <input type="date"
+                                       id="dateOfManufacturer"
+                                       th:field="*{dateOfManufacturer}"
+                                       th:errorclass="is-invalid"
+                                       class="form-control form-control-lg"/>
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Date of Manufacturer is required.
+                                </p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="text-center text-warning font-weight-bold" for="horsePower">Horse
+                                    power</label>
                                 <input type="number"
                                        id="horsePower"
+                                       th:field="*{horsePower}"
+                                       th:errorclass="is-invalid"
                                        class="form-control form-control-lg"/>
-                                <!--                                    <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"-->
-                                <!--                                           class="text-danger">Error message</small>-->
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Horse power is required.
+                                </p>
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <label class="text-center text-warning" for="modification">Modification</label>
+                            <div class="col-md-4 mb-3">
+                                <label class="text-center text-warning font-weight-bold"
+                                       for="modification">Modification</label>
                                 <input type="text"
                                        id="modification"
+                                       th:field="*{modification}"
+                                       th:errorclass="is-invalid"
                                        class="form-control form-control-lg"
                                        placeholder=""/>
-                                <!--                                    <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"-->
-                                <!--                                           class="text-danger">Error message</small>-->
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Modification is required.
+                                </p>
                             </div>
                         </div>
 
@@ -153,7 +181,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="price" class="text-warning font-weight-bold">Price</label>
                                 <input id="price"
-                                       name="price"
+                                       th:field="*{price}"
+                                       th:errorclass="is-invalid"
                                        type="number" min="0" step="100" class="form-control"
                                        placeholder="Suggested price"/>
                                 <p class="invalid-feedback errors alert alert-danger">
@@ -163,7 +192,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="mileage" class="text-warning font-weight-bold">Mileage</label>
                                 <input id="mileage"
-                                       name="mileage"
+                                       th:field="*{mileage}"
+                                       th:errorclass="is-invalid"
                                        type="number" min="0" max="900000" step="1000"
                                        class="form-control"
                                        placeholder="Mileage in kilometers"/>
@@ -173,40 +203,65 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-4">
-                            <label class="text-center text-warning" for="dateOfManufacturer">Date of
-                                Manufacturer</label>
-                            <input type="datetime-local"
-                                   id="dateOfManufacturer"
-                                   class="form-control form-control-lg"/>
-                            <!--                                    <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"-->
-                            <!--                                           class="text-danger">Error message</small>-->
-                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="text-center text-warning font-weight-bold" for="city">City</label>
+                                <input type="text"
+                                       id="city"
+                                       th:field="*{city}"
+                                       th:errorclass="is-invalid"
+                                       class="form-control form-control-lg"
+                                       placeholder="Write your city"/>
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    City is required.
+                                </p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="text-center text-warning font-weight-bold" for="postCode">Street</label>
+                                <input type="text"
+                                       id="Street"
+                                       th:field="*{street}"
+                                       th:errorclass="is-invalid"
+                                       class="form-control form-control-lg"
+                                       placeholder="Write your street"/>
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Street is required.
+                                </p>
+                            </div>
 
-                        <div class="col-md-6 mb-4">
-                            <label class="text-center text-warning" for="city">City</label>
-                            <input type="text"
-                                   id="city"
-                                   class="form-control form-control-lg"
-                                   placeholder="Write your current address"/>
-                            <!--                                    <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"-->
-                            <!--                                           class="text-danger">Error message</small>-->
-                        </div>
+                            <div class="col-md-2 mb-3">
+                                <label class="text-center text-warning font-weight-bold"
+                                       for="streetNumber">Number</label>
+                                <input type="number"
+                                       id="streetNumber"
+                                       th:field="*{streetNumber}"
+                                       th:errorclass="is-invalid"
+                                       class="form-control form-control-lg"
+                                       placeholder="Street number"/>
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Street number is required.
+                                </p>
+                            </div>
 
-                        <div class="col-md-6 mb-4">
-                            <label class="text-center text-warning" for="postCode">PostCode</label>
-                            <input type="number"
-                                   id="postCode"
-                                   class="form-control form-control-lg"
-                                   placeholder="Write your current address"/>
-                            <!--                                    <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"-->
-                            <!--                                           class="text-danger">Error message</small>-->
+                            <div class="col-md-2 mb-3">
+                                <label class="text-center text-warning font-weight-bold" for="postCode">PostCode</label>
+                                <input type="number"
+                                       id="postCode"
+                                       th:field="*{postCode}"
+                                       th:errorclass="is-invalid"
+                                       class="form-control form-control-lg"
+                                       placeholder="PostCode"/>
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    PostCode is required.
+                                </p>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label class="text-warning font-weight-bold" for="description">Description</label>
                             <textarea id="description"
-                                      name="description"
+                                      th:field="*{description}"
+                                      th:errorclass="is-invalid"
                                       type="textarea" class="form-control" rows="3"
                                       placeholder="Description"></textarea>
                             <p class="invalid-feedback errors alert alert-danger">

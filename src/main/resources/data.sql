@@ -1,0 +1,18 @@
+insert into brands(`name`)
+values ('KTM'),
+       ('Beta'),
+       ('Kawasaki'),
+       ('Honda'),
+       ('BMW'),
+       ('Suzuki'),
+       ('Aprilia'),
+       ('Balkan'),
+       ('Ducati'),
+       ('GASGAS'),
+       ('Harley-Davidson'),
+       ('Husqvarna'),
+       ('Kymco'),
+       ('MV Agusta'),
+       ('Piaggio'),
+       ('Peugeot'),
+       ('Simson');

@@ -13,6 +13,13 @@ public class Brand extends BaseEntity{
     @OneToMany(mappedBy = "brand", targetEntity = Model.class)
     private List<Model> models;
 
+    public Brand(String name) {
+        this.name = name;
+    }
+
+    public Brand() {
+    }
+
     public String getName() {
         return name;
     }
