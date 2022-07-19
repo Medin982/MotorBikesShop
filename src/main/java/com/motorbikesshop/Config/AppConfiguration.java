@@ -17,17 +17,15 @@ public class AppConfiguration {
     public ModelMapper modelMapper() {
         //Custom Converter: String -> LocalDate
 
-//        ModelMapper modelMapper = new ModelMapper();
-//        Converter<String, LocalDate> toLocalDate = new AbstractConverter<String, LocalDate>() {
-//            @Override
-//            protected LocalDate convert(String source) {
-//                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//                LocalDate localDate = LocalDate.parse(source ,format);
-//                return localDate;
-//            }
-//        };
-//        return modelMapper;
-//    }
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+        Converter<String, LocalDate> toLocalDate = new AbstractConverter<String, LocalDate>() {
+            @Override
+            protected LocalDate convert(String source) {
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date = LocalDate.parse(source ,format);
+                return date;
+            }
+        };
+        return modelMapper;
     }
 }

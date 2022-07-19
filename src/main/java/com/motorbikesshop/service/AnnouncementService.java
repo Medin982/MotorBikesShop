@@ -47,7 +47,6 @@ public class AnnouncementService {
     }
 
     private void initializerAnnouncement(AddAnnouncementDTO announcementDTO, Optional<UserEntity> seller, Address address) {
-//        TODO: Throws exception for dateOfManufacture, because can't parse
         Announcement announcement = this.modelMapper.map(announcementDTO, Announcement.class);
         announcement.setCreated(LocalDateTime.now());
         announcement.setAddress(address);

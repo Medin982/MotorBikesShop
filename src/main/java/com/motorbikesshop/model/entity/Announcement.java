@@ -2,7 +2,6 @@ package com.motorbikesshop.model.entity;
 
 import com.motorbikesshop.model.enums.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -34,7 +33,6 @@ public class Announcement extends BaseEntity{
     private BigDecimal price;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfManufacture;
 
     @Enumerated(EnumType.STRING)
@@ -153,14 +151,6 @@ public class Announcement extends BaseEntity{
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public LocalDate getDateОfМanufacturе() {
-        return dateOfManufacture;
-    }
-
-    public void setDateОfМanufacturе(LocalDate dateOfManufacture) {
-        this.dateOfManufacture = dateOfManufacture;
     }
 
     public MotorBikesType getCategory() {

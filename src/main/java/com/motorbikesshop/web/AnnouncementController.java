@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/add")
+@RequestMapping("/announcement")
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
@@ -28,7 +28,7 @@ public class AnnouncementController {
     }
 
 
-    @GetMapping("/announcement")
+    @GetMapping("/add")
     public String announcement(Model model) {
         if (!model.containsAttribute("announcementDTO")) {
             model.addAttribute("announcementDTO", new AddAnnouncementDTO());
@@ -37,7 +37,7 @@ public class AnnouncementController {
         return "add-announcement";
     }
 
-    @PostMapping("/announcement")
+    @PostMapping("/add")
     public String announcement(@Valid AddAnnouncementDTO announcementDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
