@@ -3,6 +3,7 @@ package com.motorbikesshop.model.dtos;
 import com.motorbikesshop.model.enums.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ public class AddAnnouncementDTO {
     @PastOrPresent
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfManufacturer;
+    private LocalDate dateOfManufacture;
 
     @Positive
     private int horsePower;
@@ -63,6 +64,18 @@ public class AddAnnouncementDTO {
     @NotBlank
     @Size(min = 10)
     private String description;
+
+    @NotNull
+    @Lob
+    private byte[] images;
+
+    public byte[] getImages() {
+        return images;
+    }
+
+    public void setImages(byte[] images) {
+        this.images = images;
+    }
 
     public String getBrandId() {
         return brandId;
@@ -128,12 +141,12 @@ public class AddAnnouncementDTO {
         this.color = color;
     }
 
-    public LocalDate getDateOfManufacturer() {
-        return dateOfManufacturer;
+    public LocalDate getDateOfManufacture() {
+        return dateOfManufacture;
     }
 
-    public void setDateOfManufacturer(LocalDate dateOfManufacturer) {
-        this.dateOfManufacturer = dateOfManufacturer;
+    public void setDateOfManufacture(LocalDate dateOfManufacture) {
+        this.dateOfManufacture = dateOfManufacture;
     }
 
     public int getHorsePower() {

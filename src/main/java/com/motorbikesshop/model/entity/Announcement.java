@@ -2,6 +2,7 @@ package com.motorbikesshop.model.entity;
 
 import com.motorbikesshop.model.enums.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 public class Announcement extends BaseEntity{
 
     @ManyToOne(optional = false)
-    private Model model;
+    private Brand brand;
 
     @Column(nullable = false)
     private int horsePower;
@@ -33,7 +34,8 @@ public class Announcement extends BaseEntity{
     private BigDecimal price;
 
     @Column(nullable = false)
-    private LocalDate dateОfМanufacturе;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfManufacture;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -62,6 +64,25 @@ public class Announcement extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Lob
+    private byte[] images;
+
+    public ConditionType getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(ConditionType conditions) {
+        this.conditions = conditions;
+    }
+
+    public byte[] getImages() {
+        return images;
+    }
+
+    public void setImages(byte[] images) {
+        this.images = images;
+    }
+
     public UserEntity getSeller() {
         return seller;
     }
@@ -78,12 +99,20 @@ public class Announcement extends BaseEntity{
         this.description = description;
     }
 
-    public Model getModel() {
-        return model;
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public LocalDate getDateOfManufacture() {
+        return dateOfManufacture;
+    }
+
+    public void setDateOfManufacture(LocalDate dateOfManufacture) {
+        this.dateOfManufacture = dateOfManufacture;
     }
 
     public int getHorsePower() {
@@ -127,11 +156,11 @@ public class Announcement extends BaseEntity{
     }
 
     public LocalDate getDateОfМanufacturе() {
-        return dateОfМanufacturе;
+        return dateOfManufacture;
     }
 
-    public void setDateОfМanufacturе(LocalDate dateОfМanufacturе) {
-        this.dateОfМanufacturе = dateОfМanufacturе;
+    public void setDateОfМanufacturе(LocalDate dateOfManufacture) {
+        this.dateOfManufacture = dateOfManufacture;
     }
 
     public MotorBikesType getCategory() {

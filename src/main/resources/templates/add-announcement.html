@@ -139,15 +139,15 @@
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label class="text-center text-warning font-weight-bold" for="dateOfManufacturer">
-                                    Date of Manufacturer</label>
+                                <label class="text-center text-warning font-weight-bold" for="dateOfManufacture">
+                                    Date of Manufacture</label>
                                 <input type="date"
-                                       id="dateOfManufacturer"
-                                       th:field="*{dateOfManufacturer}"
+                                       id="dateOfManufacture"
+                                       th:field="*{dateOfManufacture}"
                                        th:errorclass="is-invalid"
                                        class="form-control form-control-lg"/>
                                 <p class="invalid-feedback errors alert alert-danger">
-                                    Date of Manufacturer is required.
+                                    Date of Manufacture is required.
                                 </p>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -183,7 +183,7 @@
                                 <input id="price"
                                        th:field="*{price}"
                                        th:errorclass="is-invalid"
-                                       type="number" min="0" step="100" class="form-control"
+                                       type="number" min="0" step="1" class="form-control"
                                        placeholder="Suggested price"/>
                                 <p class="invalid-feedback errors alert alert-danger">
                                     Suggested price is required.
@@ -194,7 +194,7 @@
                                 <input id="mileage"
                                        th:field="*{mileage}"
                                        th:errorclass="is-invalid"
-                                       type="number" min="0" max="900000" step="1000"
+                                       type="number" min="0" max="900000" step="1"
                                        class="form-control"
                                        placeholder="Mileage in kilometers"/>
                                 <p class="invalid-feedback errors alert alert-danger">
@@ -268,6 +268,20 @@
                                 Description is required.
                             </p>
                         </div>
+
+                        <div>
+                            <label for="images" class="form-label text-warning font-weight-bold">Multiple files input example</label>
+                            <input class="form-control"
+                                   type="file"
+                                   id="images"
+                                   th:field="*{images}"
+                                   th:errorclass="is-invalid"
+                                   multiple />
+                            <p class="invalid-feedback errors alert alert-danger">
+                                Images is required.
+                            </p>
+                        </div>
+
                         <div class="form-check d-flex justify-content-center mb-5 text-warning">
                             <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg"/>
                             <label class="form-check-label" for="form2Example3cg">
