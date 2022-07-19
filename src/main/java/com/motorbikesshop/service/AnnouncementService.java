@@ -5,13 +5,19 @@ import com.motorbikesshop.model.entity.Address;
 import com.motorbikesshop.model.entity.Announcement;
 import com.motorbikesshop.model.entity.City;
 import com.motorbikesshop.model.entity.UserEntity;
+import com.motorbikesshop.model.view.AnnouncementViewModel;
 import com.motorbikesshop.repository.*;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.aspectj.util.FileUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AnnouncementService {
@@ -48,6 +54,7 @@ public class AnnouncementService {
 
     private void initializerAnnouncement(AddAnnouncementDTO announcementDTO, Optional<UserEntity> seller, Address address) {
         Announcement announcement = this.modelMapper.map(announcementDTO, Announcement.class);
+        byte[] images = announcement.getImages();
         announcement.setCreated(LocalDateTime.now());
         announcement.setAddress(address);
         announcement.setSeller(seller.get());
@@ -77,5 +84,21 @@ public class AnnouncementService {
         city.setPostCode(announcementDTO.getPostCode());
         this.cityRepository.save(city);
         return city;
+    }
+
+    public List<AnnouncementViewModel> getAll() {
+        //TODO: Find how to present image from dataBase in page
+        return this.announcementRepository.
+                findAll().
+                stream().
+                map(announcement -> {
+                    byte[] images = announcement.getImages();
+                    String encodeImages = Base64.getEncoder().encodeToString(images);
+                    byte[] decodeBytes = Base64.getDecoder().decode(encodeImages);
+                    AnnouncementViewModel current = this.modelMapper.map(announcement, AnnouncementViewModel.class);
+                    current.setImages(encodeImages);
+                    return current;
+                }).
+                collect(Collectors.toList());
     }
 }

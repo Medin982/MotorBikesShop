@@ -1,6 +1,7 @@
 package com.motorbikesshop.web;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
+import com.motorbikesshop.model.view.AnnouncementViewModel;
 import com.motorbikesshop.service.AnnouncementService;
 import com.motorbikesshop.service.BrandService;
 import org.springframework.stereotype.Controller;
@@ -49,5 +50,11 @@ public class AnnouncementController {
         }
         this.announcementService.createAnnouncement(announcementDTO, principal);
         return "redirect:/";
+    }
+
+    @GetMapping("/present")
+    public String present(Model model) {
+        model.addAttribute("allAnnouncement", this.announcementService.getAll());
+        return "all-announcement";
     }
 }
