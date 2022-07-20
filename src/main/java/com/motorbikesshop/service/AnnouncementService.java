@@ -1,37 +1,26 @@
 package com.motorbikesshop.service;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
-import com.motorbikesshop.model.entity.Address;
-import com.motorbikesshop.model.entity.Announcement;
-import com.motorbikesshop.model.entity.City;
-import com.motorbikesshop.model.entity.UserEntity;
+import com.motorbikesshop.model.entity.*;
 import com.motorbikesshop.model.view.AnnouncementViewModel;
 import com.motorbikesshop.repository.*;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.aspectj.util.FileUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class AnnouncementService {
-
     private final AnnouncementRepository announcementRepository;
-
     private final UserRepository userRepository;
-
     private final BrandRepository brandRepository;
-
     private final CityRepository cityRepository;
-
     private final AddressRepository addressRepository;
-
     private final ModelMapper modelMapper;
 
     public AnnouncementService(AnnouncementRepository announcementRepository, UserRepository userRepository,
@@ -44,20 +33,34 @@ public class AnnouncementService {
         this.addressRepository = addressRepository;
         this.modelMapper = modelMapper;
     }
-
+//TODO: Need to optimize all methods
     public void createAnnouncement(AddAnnouncementDTO announcementDTO, Principal principal) {
         Optional<UserEntity> seller = this.userRepository.findByEmail(principal.getName());
         City city = initializerCIty(announcementDTO);
         Address address = initializerAddresses(announcementDTO, city);
-        initializerAnnouncement(announcementDTO, seller, address);
+        List<Images> images = announcementDTO.
+                getImages().
+                stream().
+                map(imagesAddDTO -> {
+                    Images current = new Images();
+                    current.setName(imagesAddDTO.getImagesFile().getName());
+                    try {
+                        current.setUrl(String.valueOf(imagesAddDTO.getImagesFile().getResource().getURL()));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return current;
+                }).collect(Collectors.toList());
+        initializerAnnouncement(announcementDTO, seller, address, images);
     }
 
-    private void initializerAnnouncement(AddAnnouncementDTO announcementDTO, Optional<UserEntity> seller, Address address) {
+    private void initializerAnnouncement(AddAnnouncementDTO announcementDTO, Optional<UserEntity> seller,
+                                         Address address, List<Images> images) {
         Announcement announcement = this.modelMapper.map(announcementDTO, Announcement.class);
-        byte[] images = announcement.getImages();
         announcement.setCreated(LocalDateTime.now());
         announcement.setAddress(address);
         announcement.setSeller(seller.get());
+        announcement.setImages(images);
         this.announcementRepository.save(announcement);
     }
 
@@ -91,14 +94,7 @@ public class AnnouncementService {
         return this.announcementRepository.
                 findAll().
                 stream().
-                map(announcement -> {
-                    byte[] images = announcement.getImages();
-                    String encodeImages = Base64.getEncoder().encodeToString(images);
-                    byte[] decodeBytes = Base64.getDecoder().decode(encodeImages);
-                    AnnouncementViewModel current = this.modelMapper.map(announcement, AnnouncementViewModel.class);
-                    current.setImages(encodeImages);
-                    return current;
-                }).
+                map(announcement -> this.modelMapper.map(announcement, AnnouncementViewModel.class)).
                 collect(Collectors.toList());
     }
 }

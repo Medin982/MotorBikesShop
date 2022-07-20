@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name ="announcements")
@@ -62,8 +64,8 @@ public class Announcement extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Lob
-    private byte[] images;
+    @OneToMany(mappedBy = "announcement", targetEntity = Images.class, fetch = FetchType.EAGER)
+    private List<Images> images = new ArrayList<>();
 
     public ConditionType getConditions() {
         return conditions;
@@ -73,11 +75,11 @@ public class Announcement extends BaseEntity{
         this.conditions = conditions;
     }
 
-    public byte[] getImages() {
+    public List<Images> getImages() {
         return images;
     }
 
-    public void setImages(byte[] images) {
+    public void setImages(List<Images> images) {
         this.images = images;
     }
 

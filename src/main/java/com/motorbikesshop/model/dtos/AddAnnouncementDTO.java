@@ -7,6 +7,8 @@ import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddAnnouncementDTO {
 
@@ -65,15 +67,14 @@ public class AddAnnouncementDTO {
     @Size(min = 10)
     private String description;
 
-    @NotNull
-    @Lob
-    private byte[] images;
+    @NotEmpty
+    private List<ImagesAddDTO> images = new ArrayList<>();
 
-    public byte[] getImages() {
+    public List<ImagesAddDTO> getImages() {
         return images;
     }
 
-    public void setImages(byte[] images) {
+    public void setImages(List<ImagesAddDTO> images) {
         this.images = images;
     }
 

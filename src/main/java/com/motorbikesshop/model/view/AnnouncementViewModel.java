@@ -5,6 +5,8 @@ import com.motorbikesshop.model.enums.EngineType;
 import com.motorbikesshop.model.enums.TransmissionType;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnnouncementViewModel {
 
@@ -12,7 +14,7 @@ public class AnnouncementViewModel {
 
     private String modification;
 
-    private String images;
+    private List<ImagesViewModel> images = new ArrayList<>();
 
     private TransmissionType transmission;
 
@@ -46,11 +48,11 @@ public class AnnouncementViewModel {
         this.modification = modification;
     }
 
-    public String getImages() {
+    public List<ImagesViewModel> getImages() {
         return images;
     }
 
-    public void setImages(String images) {
+    public void setImages(List<ImagesViewModel> images) {
         this.images = images;
     }
 
@@ -77,4 +79,6 @@ public class AnnouncementViewModel {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
+
+
 }
