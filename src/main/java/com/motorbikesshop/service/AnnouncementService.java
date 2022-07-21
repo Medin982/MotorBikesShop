@@ -1,16 +1,20 @@
 package com.motorbikesshop.service;
 
+import com.motorbikesshop.Config.FileUploadUtilConfig;
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
 import com.motorbikesshop.model.entity.*;
 import com.motorbikesshop.model.view.AnnouncementViewModel;
 import com.motorbikesshop.repository.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,37 +25,37 @@ public class AnnouncementService {
     private final BrandRepository brandRepository;
     private final CityRepository cityRepository;
     private final AddressRepository addressRepository;
+    private final ImagesRepository imagesRepository;
     private final ModelMapper modelMapper;
 
     public AnnouncementService(AnnouncementRepository announcementRepository, UserRepository userRepository,
                                BrandRepository brandRepository, CityRepository cityRepository,
-                               AddressRepository addressRepository, ModelMapper modelMapper) {
+                               AddressRepository addressRepository, ImagesRepository imagesRepository, ModelMapper modelMapper) {
         this.announcementRepository = announcementRepository;
         this.userRepository = userRepository;
         this.brandRepository = brandRepository;
         this.cityRepository = cityRepository;
         this.addressRepository = addressRepository;
+        this.imagesRepository = imagesRepository;
         this.modelMapper = modelMapper;
     }
 //TODO: Need to optimize all methods
-    public void createAnnouncement(AddAnnouncementDTO announcementDTO, Principal principal) {
+    public void createAnnouncement(AddAnnouncementDTO announcementDTO, Principal principal,
+                                   MultipartFile multipartFile) throws IOException {
         Optional<UserEntity> seller = this.userRepository.findByEmail(principal.getName());
         City city = initializerCIty(announcementDTO);
         Address address = initializerAddresses(announcementDTO, city);
-        List<Images> images = announcementDTO.
-                getImages().
-                stream().
-                map(imagesAddDTO -> {
-                    Images current = new Images();
-                    current.setName(imagesAddDTO.getImagesFile().getName());
-                    try {
-                        current.setUrl(String.valueOf(imagesAddDTO.getImagesFile().getResource().getURL()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    return current;
-                }).collect(Collectors.toList());
-        initializerAnnouncement(announcementDTO, seller, address, images);
+        Images images = new Images();
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        images.setUrl(fileName);
+        images.setName("1");
+        Images savedImage = this.imagesRepository.save(images);
+
+        String uploadDir = "announcement-photos/" + savedImage.getId();
+
+        FileUploadUtilConfig.saveFile(uploadDir, fileName, multipartFile);
+
+        initializerAnnouncement(announcementDTO, seller, address, List.of(images));
     }
 
     private void initializerAnnouncement(AddAnnouncementDTO announcementDTO, Optional<UserEntity> seller,

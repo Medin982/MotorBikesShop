@@ -3,12 +3,9 @@ package com.motorbikesshop.model.dtos;
 import com.motorbikesshop.model.enums.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddAnnouncementDTO {
 
@@ -66,17 +63,6 @@ public class AddAnnouncementDTO {
     @NotBlank
     @Size(min = 10)
     private String description;
-
-    @NotEmpty
-    private List<ImagesAddDTO> images = new ArrayList<>();
-
-    public List<ImagesAddDTO> getImages() {
-        return images;
-    }
-
-    public void setImages(List<ImagesAddDTO> images) {
-        this.images = images;
-    }
 
     public String getBrandId() {
         return brandId;

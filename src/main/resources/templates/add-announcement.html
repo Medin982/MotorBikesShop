@@ -15,7 +15,8 @@
 
                     <form th:action="@{/announcement/add}"
                           th:method="post"
-                          th:object="${announcementDTO}">
+                          th:object="${announcementDTO}"
+                          enctype="multipart/form-data">
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
@@ -275,8 +276,10 @@
                             <input class="form-control"
                                    type="file"
                                    id="images"
-                                   th:field="*{images}"
-                                   th:errorclass="is-invalid"
+                                   name="images"
+                                   accept="image/jpeg, image/png">
+<!--                                   th:field="*{images}"-->
+<!--                                   th:errorclass="is-invalid"-->
                                    multiple />
                             <p class="invalid-feedback errors alert alert-danger">
                                 Images is required.
