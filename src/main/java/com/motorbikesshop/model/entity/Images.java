@@ -1,33 +1,21 @@
 package com.motorbikesshop.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "images")
 public class Images extends BaseEntity{
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     private String url;
 
     @ManyToOne
     private Announcement announcement;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Transient
     public String getUrl() {
-        return url;
+        if (url == null || getId() == null) return null;
+        return "/announcement-photos/" + getId() + "/" + url;
     }
 
     public void setUrl(String url) {

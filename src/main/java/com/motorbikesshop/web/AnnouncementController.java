@@ -56,6 +56,7 @@ public class AnnouncementController {
     @GetMapping("/present")
     public String present(Model model) {
         model.addAttribute("allAnnouncement", this.announcementService.getAll());
+        System.out.println();
         return "all-announcement";
     }
 }
