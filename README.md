@@ -1,10 +1,10 @@
-# MotorBIkeShop
+# MotorBikeShop
 
 ## Spring project for SoftUni Java Web course
 
 ### **Technologies used:**
 *  MySQL
-*  Thymeleaf
+*  Thymealeaf
 *  Bootstrap
 *  HTML&CSS
 *  Spring Boot
