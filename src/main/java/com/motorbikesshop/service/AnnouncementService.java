@@ -3,13 +3,13 @@ package com.motorbikesshop.service;
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
 import com.motorbikesshop.model.entity.*;
 import com.motorbikesshop.model.view.AnnouncementViewModel;
-import com.motorbikesshop.model.view.ImagesViewModel;
 import com.motorbikesshop.repository.*;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -55,15 +55,13 @@ public class AnnouncementService {
         return this.announcementRepository.save(announcement);
     }
 
-    public List<AnnouncementViewModel> getAll() {
+    public Page<AnnouncementViewModel> getAll(Pageable pageable) {
         return this.announcementRepository.
-                findAll().
-                stream().
+                findAll(pageable).
                 map(announcement -> {
                     AnnouncementViewModel current = this.modelMapper.map(announcement, AnnouncementViewModel.class);
                     current.setImages(this.imagesService.getImage(announcement.getId()));
                     return current;
-                }).
-                collect(Collectors.toList());
+                });
     }
 }

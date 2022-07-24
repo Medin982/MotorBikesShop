@@ -1,6 +1,7 @@
 package com.motorbikesshop.model.view;
 
 import com.motorbikesshop.model.entity.Brand;
+import com.motorbikesshop.model.enums.ColorType;
 import com.motorbikesshop.model.enums.EngineType;
 import com.motorbikesshop.model.enums.TransmissionType;
 
@@ -16,7 +17,7 @@ public class AnnouncementViewModel {
 
     private ImagesViewModel images;
 
-    private TransmissionType transmission;
+    private ColorType color;
 
     private EngineType engine;
 
@@ -56,12 +57,12 @@ public class AnnouncementViewModel {
         this.images = images;
     }
 
-    public TransmissionType getTransmission() {
-        return transmission;
+    public ColorType getColor() {
+        return color;
     }
 
-    public void setTransmission(TransmissionType transmission) {
-        this.transmission = transmission;
+    public void setColor(ColorType color) {
+        this.color = color;
     }
 
     public EngineType getEngine() {

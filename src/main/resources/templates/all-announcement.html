@@ -1,47 +1,67 @@
 <!doctype html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:include="~{fragments/head}"></head>
+<head th:replace="~{fragments/head}"
+      rel="stylesheet" href="/css/all-announcement.css"></head>
 <body>
 <nav th:include="~{fragments/navBar}"></nav>
-<!--TODO: Need to refactor card present to make it look better.-->
+
 <div class="container-fluid" style="margin-top: 80px">
     <div class="offers row mx-auto d-flex flex-row justify-content-center">
-        <div th:each="current : ${allAnnouncement}" th:object="${current}"
-             class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
+        <div th:each="current : ${allAnnouncement.getContent()}" th:object="${current}"
+             class="offer card col-sm-7 col-md-3  col-lg-2 m-1 p-0 bg-dark">
             <div class="card-img-top-wrapper">
                 <img class="img-thumbnail" th:src="*{images.url}" alt="Car image">
             </div>
             <div class="card-body pb-1">
-                <h5 th:text="|*{brand.name} *{modification}|" class="card-title">
-                    Offer year Brand name Model name</h5>
+                <a class="card-title align-text-bottom text-light font-weight-bold"
+                    th:href="@{/announcement/details}"
+                        th:text="|*{brand.name} *{modification}|">
+                    Brand name Model name</a>
             </div>
             <ul class="offer-details list-group list-group-flush">
-                <li class="list-group-item">
-                    <div class="card-text"
-                         name="mileage"
-                         th:text="|Mileage - *{mileage}|"><span></span>
-                    </div>
+                <li class="list-group-item text-warning bg-dark">
                     <div class="card-text"
                          name="price"
-                         th:text="|Price - *{price}|"><span></span>
+                         th:text="|Price - *{price} BGN|"><span></span>
+                    </div>
+                    <div class="card-text"
+                         name="mileage"
+                         th:text="|Mileage - *{mileage} Km|"><span></span>
                     </div>
                     <div class="card-text"
                          name="engineType"
-                         th:text="|Engine type - *{engine}|"><span></span>
+                         th:text="|Engine - *{engine}|"><span></span>
                     </div>
                     <div class="card-text"
                          name="transmissionType"
-                         th:text="|Transmission type - *{transmission}|"><span></span>
+                         th:text="|Color - *{color}|"><span></span>
                     </div>
                 </li>
             </ul>
-            <div class="card-body">
-<!--                <a class="card-link" th:href="@{/offers/details/{id}(id = *{id})}">Details</a>-->
-            </div>
         </div>
     </div>
 </div>
+<!--TODO: Do implement pagination to work correctly-->
+<nav class="container-fluid row justify-content-center">
+    <ul class="pagination text-warning">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item" th:classappend="${allAnnouncement.isFirst()} ? 'disabled' : ''">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
 <footer th:include="~{fragments/footer}"></footer>
 </body>

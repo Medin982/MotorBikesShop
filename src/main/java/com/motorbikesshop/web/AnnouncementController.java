@@ -3,6 +3,7 @@ package com.motorbikesshop.web;
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
 import com.motorbikesshop.service.AnnouncementService;
 import com.motorbikesshop.service.BrandService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,8 +56,8 @@ public class AnnouncementController {
     }
 
     @GetMapping("/present")
-    public String present(Model model) {
-        model.addAttribute("allAnnouncement", this.announcementService.getAll());
+    public String present(Model model, Pageable pageable) {
+        model.addAttribute("allAnnouncement", this.announcementService.getAll(pageable));
         return "all-announcement";
     }
 }
