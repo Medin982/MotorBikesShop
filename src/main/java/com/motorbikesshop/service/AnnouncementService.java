@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -37,7 +38,7 @@ public class AnnouncementService {
     }
 
     public void createAnnouncement(AddAnnouncementDTO announcementDTO, Principal principal,
-                                   MultipartFile multipartFile) throws IOException {
+                                   List<MultipartFile> multipartFile) throws IOException {
         Optional<UserEntity> seller = this.userRepository.findByEmail(principal.getName());
         City city = this.cityService.createCity(announcementDTO.getCity(), announcementDTO.getPostCode());
         Address address = this.addressService.createAddresses(announcementDTO.getStreet(), announcementDTO.getStreetNumber(), city);
@@ -46,7 +47,7 @@ public class AnnouncementService {
     }
 
     private Announcement initializerAnnouncement(AddAnnouncementDTO announcementDTO, Optional<UserEntity> seller,
-                                         Address address) {
+                                                 Address address) {
         Announcement announcement = this.modelMapper.map(announcementDTO, Announcement.class);
         announcement.setCreated(LocalDateTime.now());
         announcement.setAddress(address);
@@ -54,15 +55,15 @@ public class AnnouncementService {
         return this.announcementRepository.save(announcement);
     }
 
-
-
-
-
     public List<AnnouncementViewModel> getAll() {
         return this.announcementRepository.
                 findAll().
                 stream().
-                map(announcement -> this.modelMapper.map(announcement, AnnouncementViewModel.class)).
+                map(announcement -> {
+                    AnnouncementViewModel current = this.modelMapper.map(announcement, AnnouncementViewModel.class);
+                    current.setImages(this.imagesService.getImage(announcement.getId()));
+                    return current;
+                }).
                 collect(Collectors.toList());
     }
 }

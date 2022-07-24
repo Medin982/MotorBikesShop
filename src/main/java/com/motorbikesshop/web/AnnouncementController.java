@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/announcement")
@@ -39,7 +40,7 @@ public class AnnouncementController {
     }
 
     @PostMapping("/add")
-    public RedirectView announcement(@RequestParam("images") MultipartFile multipartFile,
+    public RedirectView announcement(@RequestParam("images") List<MultipartFile> multipartFile,
                                @Valid AddAnnouncementDTO announcementDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
@@ -56,7 +57,6 @@ public class AnnouncementController {
     @GetMapping("/present")
     public String present(Model model) {
         model.addAttribute("allAnnouncement", this.announcementService.getAll());
-        System.out.println();
         return "all-announcement";
     }
 }

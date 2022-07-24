@@ -14,7 +14,7 @@ public class AnnouncementViewModel {
 
     private String modification;
 
-    private List<ImagesViewModel> images = new ArrayList<>();
+    private ImagesViewModel images;
 
     private TransmissionType transmission;
 
@@ -48,11 +48,11 @@ public class AnnouncementViewModel {
         this.modification = modification;
     }
 
-    public List<ImagesViewModel> getImages() {
+    public ImagesViewModel getImages() {
         return images;
     }
 
-    public void setImages(List<ImagesViewModel> images) {
+    public void setImages(ImagesViewModel images) {
         this.images = images;
     }
 
