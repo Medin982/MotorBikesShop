@@ -3,13 +3,13 @@ package com.motorbikesshop.model.view;
 import com.motorbikesshop.model.entity.Brand;
 import com.motorbikesshop.model.enums.ColorType;
 import com.motorbikesshop.model.enums.EngineType;
-import com.motorbikesshop.model.enums.TransmissionType;
+
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AnnouncementViewModel {
+
+    private String id;
 
     private Brand brand;
 
@@ -24,6 +24,14 @@ public class AnnouncementViewModel {
     private int mileage;
 
     private BigDecimal price;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public BigDecimal getPrice() {
         return price;

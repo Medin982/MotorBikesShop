@@ -2,6 +2,7 @@ package com.motorbikesshop.Config;
 
 import com.motorbikesshop.repository.UserRepository;
 import com.motorbikesshop.service.AppUserDetailsService;
+import org.springframework.boot.autoconfigure.security.StaticResourceLocation;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ public class SecurityConfiguration {
                 authorizeRequests().
                 requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 antMatchers("/", "/users/login", "/users/register").permitAll().
+                antMatchers("/announcement/present", "/announcement/details/{id}").permitAll().
                 anyRequest().
                 authenticated().
                 and().

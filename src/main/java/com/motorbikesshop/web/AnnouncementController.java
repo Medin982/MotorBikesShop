@@ -1,6 +1,7 @@
 package com.motorbikesshop.web;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
+import com.motorbikesshop.model.view.AnnouncementDetailsViewModel;
 import com.motorbikesshop.service.AnnouncementService;
 import com.motorbikesshop.service.BrandService;
 import org.springframework.data.domain.Pageable;
@@ -43,10 +44,10 @@ public class AnnouncementController {
 
     @PostMapping("/add")
     public RedirectView announcement(@RequestParam("images") List<MultipartFile> multipartFile,
-                               @Valid AddAnnouncementDTO announcementDTO,
-                               BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes,
-                               Principal principal) throws IOException {
+                                     @Valid AddAnnouncementDTO announcementDTO,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes,
+                                     Principal principal) throws IOException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("announcementDTO", announcementDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.announcementDTO", bindingResult);
@@ -58,9 +59,17 @@ public class AnnouncementController {
 
     @GetMapping("/present")
     public String present(Model model,
-                          @PageableDefault(size = 1)
+                          @PageableDefault(size = 15)
                           Pageable pageable) {
         model.addAttribute("allAnnouncement", this.announcementService.getAll(pageable));
         return "all-announcement";
+    }
+
+    @GetMapping("/details/{id}")
+    public String announcementDetails(@PathVariable String id,
+                                      Model model) {
+        AnnouncementDetailsViewModel announcement = this.announcementService.getAnnouncement(id);
+        model.addAttribute("detailsViewModel" ,announcement);
+        return "announcement-details";
     }
 }

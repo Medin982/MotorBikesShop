@@ -2,6 +2,7 @@ package com.motorbikesshop.service;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
 import com.motorbikesshop.model.entity.*;
+import com.motorbikesshop.model.view.AnnouncementDetailsViewModel;
 import com.motorbikesshop.model.view.AnnouncementViewModel;
 import com.motorbikesshop.repository.*;
 import org.modelmapper.ModelMapper;
@@ -63,5 +64,11 @@ public class AnnouncementService {
                     current.setImages(this.imagesService.getImage(announcement.getId()));
                     return current;
                 });
+    }
+
+    public AnnouncementDetailsViewModel getAnnouncement(String id) {
+        return this.announcementRepository.findById(id).
+        map(announcement -> this.modelMapper.map(announcement, AnnouncementDetailsViewModel.class)).
+                orElseThrow();
     }
 }

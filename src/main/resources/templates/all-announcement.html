@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head}"
-      rel="stylesheet" href="/css/all-announcement.css"></head>
+<head th:replace="~{fragments/head}"></head>
 <body>
 <nav th:include="~{fragments/navBar}"></nav>
 
@@ -15,7 +14,7 @@
             </div>
             <div class="card-body pb-1">
                 <a class="card-title align-text-bottom text-light font-weight-bold"
-                   th:href="@{/announcement/details}"
+                   th:href="@{/announcement/details/{id}(id = *{id})}"
                    th:text="|*{brand.name} *{modification}|">
                     Brand name Model name</a>
             </div>
@@ -23,19 +22,19 @@
                 <li class="list-group-item text-warning bg-dark">
                     <div class="card-text"
                          name="price"
-                         th:text="|Price - *{price} BGN|"><span></span>
+                         th:text="|Price - *{price} BGN|">
                     </div>
                     <div class="card-text"
                          name="mileage"
-                         th:text="|Mileage - *{mileage} Km|"><span></span>
+                         th:text="|Mileage - *{mileage} Km|">
                     </div>
                     <div class="card-text"
                          name="engineType"
-                         th:text="|Engine - *{engine}|"><span></span>
+                         th:text="|Engine - *{engine}|">
                     </div>
                     <div class="card-text"
                          name="transmissionType"
-                         th:text="|Color - *{color}|"><span></span>
+                         th:text="|Color - *{color}|">
                     </div>
                 </li>
             </ul>
@@ -43,7 +42,7 @@
     </div>
 </div>
 
-<div class="container-fluid row justify-content-center text-warning">
+<div class="container-fluid row justify-content-center">
     <ul class="pagination">
         <li class="page-item" th:classappend="${allAnnouncement.isFirst()} ? 'disabled' : ''">
             <a th:unless="${allAnnouncement.isFirst()}"
@@ -61,7 +60,7 @@
         <li class="page-item active">
             <a class="page-link"
                th:href="@{/announcement/present(size=${allAnnouncement.getSize()},page=${allAnnouncement.getNumber()})}"
-               th:text="${allAnnouncement.getNumber()}">Current page</a>
+               th:text="${allAnnouncement.getNumber() + 1}">Current page</a>
         </li>
         <li class="page-item" th:classappend="${allAnnouncement.hasNext()} ? '' : 'disabled'">
             <a class="page-link"
