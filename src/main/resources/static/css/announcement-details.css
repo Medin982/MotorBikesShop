@@ -37,14 +37,18 @@ h4 {
     margin-top: 25px;
 }
 
- section article .col {
+section article .col {
     margin-bottom: 10px;
 }
 
- h5{
-     margin-bottom: 2rem;
- }
+h5 {
+    margin-bottom: 2rem;
+}
 
- section .container-fluid {
-     padding: 1rem;
- }
+section .container-fluid {
+    padding: 1rem;
+}
+
+.contact div {
+    border-radius: 20px;
+}

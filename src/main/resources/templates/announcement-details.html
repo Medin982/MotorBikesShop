@@ -13,16 +13,17 @@
 </head>
 <body>
 <nav th:replace="~{fragments/navBar}"></nav>
-<!--TODO:Need to fix titles position-->
-<h3 class="card-title text-light font-weight-bold"
-    th:object="${detailsViewModel}"
-    th:text="|*{brand.name} *{modification}|">
-    Brand name Model name</h3>
+<div class="row">
+    <h3 class="col-md-6 text-light font-weight-bold"
+        th:object="${detailsViewModel}"
+        th:text="|*{brand.name} *{modification}|">
+        Brand name Model name</h3>
 
-<h4 class="text-primary font-weight-bold"
-    th:object="${detailsViewModel}"
-    th:text="|*{price}BGN|">
-    Price</h4>
+    <h4 class="col-md-6 text-primary font-weight-bold"
+        th:object="${detailsViewModel}"
+        th:text="|*{price}BGN|">
+        Price</h4>
+</div>
 
 <section class="container" th:object="${detailsViewModel}">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -41,7 +42,7 @@
         </a>
     </div>
 
-    <article name="details">
+    <article class="details">
         <div class="col">
             <div class="container-sm list-group text-warning bg-dark">
                 <div class="card-text mb-1"
@@ -90,7 +91,7 @@
     </article>
 </section>
 
-<section name="contact">
+<section class="contact">
     <div class="container-fluid text-warning bg-dark">
         <h5 class="font-weight-bold">
             Contacts:
@@ -159,7 +160,7 @@
                                 <input type="text" id="phoneNumber"
                                        placeholder="Phone"
                                        name="phoneNumber" class="form-control">
-                                <label for="phoneNumber" class="">Email</label>
+                                <label for="phoneNumber" class="">Phone Number</label>
                             </div>
                         </div>
                     </div>
