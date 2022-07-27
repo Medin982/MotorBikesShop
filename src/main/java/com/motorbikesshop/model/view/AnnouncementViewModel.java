@@ -1,6 +1,6 @@
 package com.motorbikesshop.model.view;
 
-import com.motorbikesshop.model.entity.Brand;
+import com.motorbikesshop.model.entity.Model;
 import com.motorbikesshop.model.enums.ColorType;
 import com.motorbikesshop.model.enums.EngineType;
 
@@ -11,7 +11,7 @@ public class AnnouncementViewModel {
 
     private String id;
 
-    private Brand brand;
+    private ModelsViewModel model;
 
     private String modification;
 
@@ -41,12 +41,12 @@ public class AnnouncementViewModel {
         this.price = price;
     }
 
-    public Brand getBrand() {
-        return brand;
+    public ModelsViewModel getModel() {
+        return model;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public void setModel(ModelsViewModel model) {
+        this.model = model;
     }
 
     public String getModification() {

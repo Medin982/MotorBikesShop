@@ -1,6 +1,7 @@
 package com.motorbikesshop.model.view;
 
 import com.motorbikesshop.model.entity.Brand;
+import com.motorbikesshop.model.entity.Model;
 import com.motorbikesshop.model.enums.*;
 
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class AnnouncementDetailsViewModel {
 
-    private Brand brand;
+    private Model model;
 
     private String modification;
 
@@ -37,12 +38,12 @@ public class AnnouncementDetailsViewModel {
 
     private String description;
 
-    public Brand getBrand() {
-        return brand;
+    public Model getModel() {
+        return model;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public String getModification() {

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class AddAnnouncementDTO {
 
     @NotBlank
-    private String brandId;
+    private String modelId;
 
     @NotNull
     private TransmissionType transmission;
@@ -64,12 +64,12 @@ public class AddAnnouncementDTO {
     @Size(min = 10)
     private String description;
 
-    public String getBrandId() {
-        return brandId;
+    public String getModelId() {
+        return modelId;
     }
 
-    public void setBrandId(String brandId) {
-        this.brandId = brandId;
+    public void setModelId(String modelId) {
+        this.modelId = modelId;
     }
 
     public String getStreet() {

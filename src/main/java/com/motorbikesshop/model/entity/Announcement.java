@@ -15,7 +15,7 @@ import java.util.List;
 public class Announcement extends BaseEntity{
 
     @ManyToOne(optional = false)
-    private Brand brand;
+    private Model model;
 
     @Column(nullable = false)
     private int horsePower;
@@ -99,12 +99,12 @@ public class Announcement extends BaseEntity{
         this.description = description;
     }
 
-    public Brand getBrand() {
-        return brand;
+    public Model getModel() {
+        return model;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public LocalDate getDateOfManufacture() {

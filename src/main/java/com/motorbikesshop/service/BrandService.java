@@ -1,6 +1,6 @@
 package com.motorbikesshop.service;
 
-import com.motorbikesshop.model.view.BrandViewModel;
+import com.motorbikesshop.model.dtos.BrandDTO;
 import com.motorbikesshop.repository.BrandRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,10 +20,10 @@ public class BrandService {
         this.modelMapper = modelMapper;
     }
 
-    public List<BrandViewModel> getAll() {
+    public List<BrandDTO> getAll() {
         return this.brandRepository.findAll().
                 stream().
-                map(brand -> this.modelMapper.map(brand, BrandViewModel.class)).
+                map(brand -> this.modelMapper.map(brand, BrandDTO.class)).
                 collect(Collectors.toList());
     }
 }

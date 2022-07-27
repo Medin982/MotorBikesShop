@@ -68,8 +68,7 @@ public class AnnouncementController {
     @GetMapping("/details/{id}")
     public String announcementDetails(@PathVariable String id,
                                       Model model) {
-        AnnouncementDetailsViewModel announcement = this.announcementService.getAnnouncement(id);
-        model.addAttribute("detailsViewModel" ,announcement);
+        model.addAttribute("detailsViewModel" ,this.announcementService.getAnnouncement(id));
         return "announcement-details";
     }
 }

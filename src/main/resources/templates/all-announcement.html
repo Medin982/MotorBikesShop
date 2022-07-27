@@ -15,7 +15,7 @@
             <div class="card-body pb-1">
                 <a class="card-title align-text-bottom text-light font-weight-bold"
                    th:href="@{/announcement/details/{id}(id = *{id})}"
-                   th:text="|*{brand.name} *{modification}|">
+                   th:text="|*{model.brand.name} *{model.name}|">
                     Brand name Model name</a>
             </div>
             <ul class="offer-details list-group list-group-flush">

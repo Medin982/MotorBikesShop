@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "models")
 public class Model extends BaseEntity{
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)

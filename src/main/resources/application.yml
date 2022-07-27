@@ -13,9 +13,10 @@ spring:
     hibernate:
       ddl-auto: update
     defer-datasource-initialization: true
+  #    TODO: Insert data on DB first!!!
   sql:
     init:
-          mode: never
+      mode: never
 
   servlet:
     multipart:
