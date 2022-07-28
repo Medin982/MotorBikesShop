@@ -1,6 +1,7 @@
 package com.motorbikesshop.web;
 
 import com.motorbikesshop.model.dtos.RegisterDTO;
+import com.motorbikesshop.service.EmailService;
 import com.motorbikesshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,11 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+    private final EmailService emailService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/login")
@@ -45,6 +48,8 @@ public class UserController {
             return "redirect:register";
         }
         this.userService.registerUser(registerDTO);
+        this.emailService.sendRegistrationEmail(registerDTO.getEmail(),
+                registerDTO.getFirstName() + " " + registerDTO.getLastName());
         return "login";
     }
 }

@@ -1,26 +1,28 @@
 spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/MotorBikes?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-    username: root
-    password: 4759
-  jpa:
-    # Choose either MySQL 8 or MySQL 5 below
-    # For MySQL 8:
-    #    database-platform: org.hibernate.dialect.MySQL8Dialect
-    # For MySQL 5:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate:
-      ddl-auto: update
-    defer-datasource-initialization: true
-  #    TODO: Insert data on DB first!!!
-  sql:
-    init:
-      mode: never
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        password: 4759
+        url: jdbc:mysql://localhost:3306/MotorBikes?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+        username: root
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        defer-datasource-initialization: true
+        hibernate:
+            ddl-auto: update
 
-  servlet:
-    multipart:
-      enabled: true
-      file-size-threshold: 2KB
-      max-file-size: 200MB
-      max-request-size: 215MB
+    mail:
+        host: "localhost"
+        port: 1025
+        username: "motorBikeShop@mail.com"
+        password: ''
+
+    servlet:
+        multipart:
+            enabled: true
+            file-size-threshold: 2KB
+            max-file-size: 20MB
+            max-request-size: 25MB
+
+    sql:
+        init:
+            mode: never

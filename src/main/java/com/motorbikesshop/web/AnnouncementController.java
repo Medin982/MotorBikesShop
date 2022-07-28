@@ -1,7 +1,6 @@
 package com.motorbikesshop.web;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
-import com.motorbikesshop.model.view.AnnouncementDetailsViewModel;
 import com.motorbikesshop.service.AnnouncementService;
 import com.motorbikesshop.service.BrandService;
 import org.springframework.data.domain.Pageable;
