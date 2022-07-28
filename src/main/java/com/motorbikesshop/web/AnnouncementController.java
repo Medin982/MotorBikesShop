@@ -1,8 +1,12 @@
 package com.motorbikesshop.web;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
+import com.motorbikesshop.model.dtos.EmailRequestDTO;
+import com.motorbikesshop.model.view.AnnouncementDetailsViewModel;
+import com.motorbikesshop.model.view.UserViewModel;
 import com.motorbikesshop.service.AnnouncementService;
 import com.motorbikesshop.service.BrandService;
+import com.motorbikesshop.service.EmailService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -23,12 +27,13 @@ import java.util.List;
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
-
     private final BrandService brandService;
+    private final EmailService emailService;
 
-    public AnnouncementController(AnnouncementService announcementService, BrandService brandService) {
+    public AnnouncementController(AnnouncementService announcementService, BrandService brandService, EmailService emailService) {
         this.announcementService = announcementService;
         this.brandService = brandService;
+        this.emailService = emailService;
     }
 
 
@@ -68,6 +73,22 @@ public class AnnouncementController {
     public String announcementDetails(@PathVariable String id,
                                       Model model) {
         model.addAttribute("detailsViewModel" ,this.announcementService.getAnnouncement(id));
+        return "announcement-details";
+    }
+
+    @PostMapping("/details/{id}")
+    public String emailSendRequest(@PathVariable String id,
+                                   @Valid EmailRequestDTO emailRequestDTO,
+                                   BindingResult bindingResult,
+                                   RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("emailRequestDTO", emailRequestDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.emailRequestDTO", bindingResult);
+            return "redirect:/details/{id}";
+        }
+        AnnouncementDetailsViewModel announcement = this.announcementService.getAnnouncement(id);
+        UserViewModel seller = announcement.getSeller();
+        this.emailService.sendRequestEmailToSeller(seller, emailRequestDTO);
         return "announcement-details";
     }
 }

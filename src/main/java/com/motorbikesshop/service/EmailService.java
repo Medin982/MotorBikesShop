@@ -1,5 +1,7 @@
 package com.motorbikesshop.service;
 
+import com.motorbikesshop.model.dtos.EmailRequestDTO;
+import com.motorbikesshop.model.view.UserViewModel;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -31,16 +33,32 @@ public class EmailService {
             mimeMessageHelper.setFrom("motorBikeShop@mail.com");
             mimeMessageHelper.setTo(userEmail);
             mimeMessageHelper.setSubject("Welcome!");
-            mimeMessageHelper.setText(generateMessageContent(username), true);
+            mimeMessageHelper.setText(generateMessageContent(username, "userName", "email/registration"), true);
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private String generateMessageContent(String username) {
+    private String generateMessageContent(String subject, String field, String template) {
         Context ctx = new Context();
-        ctx.setVariable("username", username);
-        return templateEngine.process("email/registration", ctx);
+        ctx.setVariable(field, subject);
+        return templateEngine.process(template, ctx);
+    }
+
+    public void sendRequestEmailToSeller(UserViewModel seller, EmailRequestDTO emailRequestDTO) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+            mimeMessageHelper.setFrom(emailRequestDTO.getEmail());
+            mimeMessageHelper.setTo(seller.getEmail());
+            mimeMessageHelper.setSubject("Some Request for product.");
+            mimeMessageHelper.setText(generateMessageContent(emailRequestDTO.getMessage(),
+                    "message", "email/requestEmail"));
+            javaMailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
