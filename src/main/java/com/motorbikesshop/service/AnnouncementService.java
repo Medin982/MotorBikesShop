@@ -16,6 +16,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AnnouncementService {
@@ -73,5 +74,17 @@ public class AnnouncementService {
         return this.announcementRepository.findById(id).
         map(announcement -> this.modelMapper.map(announcement, AnnouncementDetailsViewModel.class)).
                 orElseThrow();
+    }
+
+    public List<AnnouncementViewModel> getLatest(LocalDateTime now) {
+        return this.announcementRepository.
+                findTop5ByCreatedLessThanOrderByCreatedDesc(now).
+                stream().
+                map(announcement -> {
+                    AnnouncementViewModel current = this.modelMapper.map(announcement, AnnouncementViewModel.class);
+                    current.setImages(this.imagesService.getImage(announcement.getId()));
+                    return current;
+                }).
+                collect(Collectors.toList());
     }
 }

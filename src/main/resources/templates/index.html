@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:https="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head}"></head>
 <body>
 <nav th:replace="~{fragments/navBar}"></nav>
@@ -9,7 +8,36 @@
 <div class="container-fluid">
     <h1 class="text-center text-warning mt-5">MotorBike Shop</h1>
     <h4 class="text-center text-white">Find your first motorcycle!</h4>
-</div><footer th:replace="~{fragments/footer}"></footer>
+</div>
+
+<!--TODO: Present latest announcement-->
+<div class="container">
+    <h5 class="d-flex justify-content-start text-white">Latest Announcement</h5>
+
+    <div class="row card mb-2 bg-dark" style="max-width: 500px;">
+        <div
+             th:each="current : ${latestAnnouncement}" th:object="${current}">
+            <div class="col-md-5">
+                <img th:src="*{images.url}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-5">
+                <h5 class="card-title">
+                    <a class="card-title"
+                       th:href="@{/announcement/details/{id}(id = *{id})}"
+                       th:text="|*{model.brand.name} *{model.name}|">
+                        Title</a>
+                </h5>
+                <p class="card-text text-warning"
+                   th:text="|Price - *{price} BGN|"></p>
+                <p class="card-text text-warning"
+                   th:text="|Mileage - *{mileage} KM|"></p>
+                <p class="card-text text-warning"
+                   th:text="|Color - *{color}|"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer}"></footer>
 <th:block th:replace="~{fragments/scripts}"></th:block>
 </body>
 </html>
