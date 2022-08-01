@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="/css/announcement-details.css">
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
     <title>Details</title>
 </head>
 <body>
@@ -31,7 +26,7 @@
 </div>
 
 <section class="container" th:object="${detailsViewModel}">
-<!--    TODO:Find a way how to present unlimited numbers images to client. -->
+    <!--    TODO:Find a way how to present unlimited numbers images to client. -->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -138,24 +133,35 @@
                     <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
                 </div>
             </div>
-<!--            TODO:Implement form-->
             <div class="col-md-6">
-                <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                <form th:action="@{/announcement/details/{id}(id = ${detailsViewModel.announcementId})}"
+                      th:method="POST"
+                      th:object="${emailRequestDTO}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="md-form mb-0">
                                 <input type="text" id="name"
-                                       name="name"
+                                       th:field="*{firstName}"
+                                       th:errorclass="is-invalid"
                                        placeholder="Your name"
                                        class="form-control">
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    First name is required.
+                                </p>
                                 <label for="name" class="">First Name</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="md-form mb-0">
-                                <input type="text" id="lastName"
+                                <input type="text"
+                                       id="lastName"
+                                       th:field="*{lastName}"
+                                       th:errorclass="is-invalid"
                                        placeholder="Last Name"
-                                       name="lastName" class="form-control">
+                                       class="form-control">
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Last name is required.
+                                </p>
                                 <label for="lastName" class="">Last Name</label>
                             </div>
                         </div>
@@ -163,17 +169,29 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="md-form mb-0">
-                                <input type="text" id="email"
+                                <input type="text"
+                                       id="email"
+                                       th:field="*{email}"
+                                       th:errorclass="is-invalid"
                                        placeholder="Your email"
-                                       name="email" class="form-control">
+                                       class="form-control">
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Email is required.
+                                </p>
                                 <label for="email" class="">Email</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="md-form mb-0">
-                                <input type="text" id="phoneNumber"
+                                <input type="text"
+                                       id="phoneNumber"
+                                       th:field="*{phoneNumber}"
+                                       th:errorclass="is-invalid"
                                        placeholder="Phone"
-                                       name="phoneNumber" class="form-control">
+                                       class="form-control">
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Phone Number is required.
+                                </p>
                                 <label for="phoneNumber" class="">Phone Number</label>
                             </div>
                         </div>
@@ -181,13 +199,21 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="md-form">
-                                <textarea type="text" id="message"
+                                <textarea type="text"
+                                          id="message"
+                                          th:field="*{message}"
+                                          th:errorclass="is-invalid"
                                           placeholder="Your message"
-                                          name="message" rows="2"
+                                          rows="2"
                                           class="form-control md-textarea"></textarea>
+                                <p class="invalid-feedback errors alert alert-danger">
+                                    Message is required.
+                                </p>
                                 <label for="message">Your message</label>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+                            <button type="submit"
+                                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Send
+                            </button>
                         </div>
                     </div>
                 </form>

@@ -72,23 +72,26 @@ public class AnnouncementController {
     @GetMapping("/details/{id}")
     public String announcementDetails(@PathVariable String id,
                                       Model model) {
+        if (!model.containsAttribute("emailRequestDTO")) {
+            model.addAttribute("emailRequestDTO", new EmailRequestDTO());
+        }
         model.addAttribute("detailsViewModel" ,this.announcementService.getAnnouncement(id));
         return "announcement-details";
     }
 
     @PostMapping("/details/{id}")
-    public String emailSendRequest(@PathVariable String id,
-                                   @Valid EmailRequestDTO emailRequestDTO,
+    public String emailSendRequest(@Valid EmailRequestDTO emailRequestDTO,
                                    BindingResult bindingResult,
-                                   RedirectAttributes redirectAttributes) {
+                                   RedirectAttributes redirectAttributes,
+                                   @PathVariable String id) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("emailRequestDTO", emailRequestDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.emailRequestDTO", bindingResult);
-            return "redirect:/details/{id}";
+            return "redirect:/announcement/details/{id}";
         }
         AnnouncementDetailsViewModel announcement = this.announcementService.getAnnouncement(id);
         UserViewModel seller = announcement.getSeller();
         this.emailService.sendRequestEmailToSeller(seller, emailRequestDTO);
-        return "announcement-details";
+        return "redirect:/announcement/details/{id}";
     }
 }

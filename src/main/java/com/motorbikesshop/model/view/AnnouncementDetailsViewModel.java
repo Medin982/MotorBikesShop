@@ -1,6 +1,5 @@
 package com.motorbikesshop.model.view;
 
-import com.motorbikesshop.model.entity.Brand;
 import com.motorbikesshop.model.entity.Model;
 import com.motorbikesshop.model.enums.*;
 
@@ -9,6 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class AnnouncementDetailsViewModel {
+
+    private String announcementId;
 
     private Model model;
 
@@ -37,6 +38,14 @@ public class AnnouncementDetailsViewModel {
     private UserViewModel seller;
 
     private String description;
+
+    public String getAnnouncementId() {
+        return announcementId;
+    }
+
+    public void setAnnouncementId(String announcementId) {
+        this.announcementId = announcementId;
+    }
 
     public Model getModel() {
         return model;

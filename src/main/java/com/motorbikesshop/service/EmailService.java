@@ -55,7 +55,7 @@ public class EmailService {
             mimeMessageHelper.setTo(seller.getEmail());
             mimeMessageHelper.setSubject("Some Request for product.");
             mimeMessageHelper.setText(generateMessageContent(emailRequestDTO.getMessage(),
-                    "message", "email/requestEmail"));
+                    "message", "email/requestEmail"), true);
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {
             throw new RuntimeException(e);
