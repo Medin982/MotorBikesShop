@@ -1,3 +1,23 @@
-h5 {
-    margin-left: 20px;
+section {
+    display: inline-flex;
+    margin: 0rem 10rem 10rem 10rem;
+}
+
+.carousel {
+    width: 50%;
+}
+
+.carousel-inner {
+    border-radius: 20px;
+}
+
+p {
+    margin-bottom: 0rem;
+}
+
+h3.info {
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    font-style: italic;
 }
