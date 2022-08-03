@@ -50,6 +50,6 @@ public class UserController {
         this.userService.registerUser(registerDTO);
         this.emailService.sendRegistrationEmail(registerDTO.getEmail(),
                 registerDTO.getFirstName() + " " + registerDTO.getLastName());
-        return "login";
+        return "redirect:login";
     }
 }
