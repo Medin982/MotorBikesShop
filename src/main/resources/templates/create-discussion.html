@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/create-discussion.css">
+    <title>Create Discussion</title>
+</head>
+<body>
+<nav th:replace="~{fragments/navBar}"></nav>
+
+<div class="container h-50 d-flex justify-content-center bg-dark">
+    <div class="col-15 col-md-12 col-lg-10 col-xl-9">
+        <div class="card-body p-5">
+            <h2 class="text-uppercase text-center mb-5 text-warning">Create discussion</h2>
+
+            <form th:action="@{/forum/discussion/create}"
+                  th:method="post"
+                  th:object="${discussion}">
+
+                <div class="form-group">
+                    <label for="name" class="text-warning font-weight-bold">Theme</label>
+                    <input id="name"
+                           th:field="*{name}"
+                           th:errorclass="is-invalid"
+                           type="text" min="0" step="1" class="form-control"
+                           placeholder="Discussion theme"/>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Theme is required.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-warning font-weight-bold" for="description">Description</label>
+                    <textarea id="description"
+                              th:field="*{description}"
+                              th:errorclass="is-invalid"
+                              type="textarea" class="form-control" rows="3"
+                              placeholder="Description"></textarea>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Description is required.
+                    </p>
+                </div>
+
+                <div class="form-check d-flex justify-content-center mb-5 text-warning">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg"/>
+                    <label class="form-check-label" for="form2Example3cg">
+                        I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                    </label>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit"
+                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Create
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/footer}"></footer>
+<script th:replace="~{fragments/scripts}"></script>
+</body>
+</html>

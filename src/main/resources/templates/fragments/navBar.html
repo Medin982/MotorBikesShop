@@ -59,14 +59,14 @@
                     </li>
                 </th:block>
                 <li class="nav-item">
-                    <a class="nav-link" href="/forum">Forum</a>
+                    <a class="nav-link" href="/forum/discussion">Forum</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/forum">About</a>
                 </li>
                 <li class="nav-item d-flex justify-content-end" sec:authorize="isAuthenticated()">
                     <div class="form-inline my-2 my-lg-0 px-3">
-                        <div class="text-white" th:text="${#authentication.principal}"></div>
+                        <div class="text-white" th:text="${#authentication.name}"></div>
                         <form th:action="@{/users/logout}" th:method="POST">
                             <input class="btn btn-link nav-link" type="submit" value="Logout">
                         </form>
