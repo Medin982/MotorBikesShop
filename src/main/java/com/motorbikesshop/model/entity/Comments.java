@@ -2,6 +2,7 @@ package com.motorbikesshop.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name = "comments")
