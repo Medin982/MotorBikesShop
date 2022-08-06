@@ -29,7 +29,7 @@ public class ForumController {
     @GetMapping("/discussion")
     public String forum(Model model, @PageableDefault(size = 5) Pageable pageable) {
         model.addAttribute("allDiscussion", this.discussionService.getAll(pageable));
-        return "forum";
+        return "discussions";
     }
 
     @GetMapping("/discussion/create")
