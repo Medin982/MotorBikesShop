@@ -7,9 +7,12 @@ import com.motorbikesshop.model.view.CommentsViewModel;
 import com.motorbikesshop.repository.CommentsRepository;
 import com.motorbikesshop.repository.DiscussionRepository;
 import com.motorbikesshop.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentsService {
@@ -20,10 +23,14 @@ public class CommentsService {
 
     private final CommentsRepository commentsRepository;
 
-    public CommentsService(DiscussionRepository discussionRepository, UserRepository userRepository, CommentsRepository commentsRepository) {
+    private final ModelMapper modelMapper;
+
+    public CommentsService(DiscussionRepository discussionRepository, UserRepository userRepository,
+                           CommentsRepository commentsRepository, ModelMapper modelMapper) {
         this.discussionRepository = discussionRepository;
         this.userRepository = userRepository;
         this.commentsRepository = commentsRepository;
+        this.modelMapper = modelMapper;
     }
 
     public CommentsViewModel createComment(CommentCreationDto commentDto) {
@@ -32,8 +39,20 @@ public class CommentsService {
         comment.setCreated(LocalDateTime.now());
         comment.setDiscussions(this.discussionRepository.findById(commentDto.getDiscussionId()).get());
         comment.setAuthor(author);
-        comment.setComment(commentDto.getMessage());
+        comment.setMessage(commentDto.getMessage());
         this.commentsRepository.save(comment);
-        return new CommentsViewModel(comment.getId() ,author.getFirstName() + " " + author.getLastName(), comment.getComment());
+        return new CommentsViewModel(comment.getId() ,author.getFirstName() + " " + author.getLastName(),
+                comment.getMessage(), comment.getCreated());
+    }
+
+    public List<CommentsViewModel> getAllCommentsForDiscussion(String id) {
+        return this.commentsRepository.findAllByDiscussionsId(id).
+                stream().
+                map(com -> {
+                    CommentsViewModel viewModel = this.modelMapper.map(com, CommentsViewModel.class);
+                    viewModel.setAuthor(com.getAuthor().getFirstName() + " " + com.getAuthor().getLastName());
+                    return viewModel;
+                }).
+                collect(Collectors.toList());
     }
 }

@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
-@RequestMapping("/forum/discussion")
+@RequestMapping("/api/discussion")
 public class DiscussionCommentRestController {
 
     private final CommentsService commentsService;
@@ -20,6 +21,10 @@ public class DiscussionCommentRestController {
         this.commentsService = commentsService;
     }
 
+    @GetMapping("/details/{id}")
+    public ResponseEntity<List<CommentsViewModel>> getComments(@PathVariable String id) {
+        return ResponseEntity.ok(this.commentsService.getAllCommentsForDiscussion(id));
+    }
 
     @PostMapping(value = "/details/{id}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<CommentsViewModel> createComments(@PathVariable String id,

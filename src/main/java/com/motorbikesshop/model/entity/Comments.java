@@ -2,14 +2,13 @@ package com.motorbikesshop.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Entity
 @Table(name = "comments")
 public class Comments extends BaseEntity{
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String comment;
+    private String message;
 
     @Column(nullable = false)
     private LocalDateTime created;
@@ -28,12 +27,12 @@ public class Comments extends BaseEntity{
         this.discussions = discussions;
     }
 
-    public String getComment() {
-        return comment;
+    public String getMessage() {
+        return message;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public LocalDateTime getCreated() {
