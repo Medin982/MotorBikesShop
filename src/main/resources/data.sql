@@ -157,3 +157,35 @@ values ('70d14389-0a78-4239-aecd-79aa5d824e01', 'SX', '70d14389-0a78-4239-aecd-7
        ('70d14389-0a78-4239-aecd-79aa5d824139', 'RG', 'f8945747-e830-4ba2-9c96-e613c0bc8b5c'),
        ('70d14389-0a78-4239-aecd-79aa5d824140', 'GIXXER', 'f8945747-e830-4ba2-9c96-e613c0bc8b5c'),
        ('70d14389-0a78-4239-aecd-79aa5d824141', 'V-STORM', 'f8945747-e830-4ba2-9c96-e613c0bc8b5c');
+
+insert into parts_categories
+values ('2240cd9f-bcba-40c8-a0ab-03fceab5f02a', 'Tyres'),
+       ('3c35a23b-c230-4874-835e-648a8005b936', 'Brake System'),
+       ('40ccd09a-6167-4c7b-bcfb-cf4d4af4675d', 'Plastics'),
+       ('5677c10b-f481-47bf-830c-f160bd28b8e5', 'Accessories'),
+       ('8d501921-3045-4667-800b-7420b12d7064', 'Suspension'),
+       ('8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc', 'Engine'),
+       ('deae8d73-b6c7-42f6-918c-0748fae51629', 'Oil');
+
+insert into parts_sub_categories
+values ('0081678c-3592-4db9-b6cb-e3544ad54d9a', 'Crankshaft', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('1d2d6104-17cb-429c-8188-9c91af4cb107', 'Camps', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('1ef4517b-beb0-45a7-83c6-f6bf4cad76fe', 'Suspension Oil', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('26ed5ef8-0962-44d4-9ae5-0813bc88043a', 'Brake Hose', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('319c1763-83a9-4487-9499-eee4eddf7fde', 'Piston', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('3658ed4e-c035-439c-8930-1d2a2a5a4a9a', 'Brake Device', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('3ea3eb15-d25a-4a25-a3ea-dcc0c6454edc', 'Engine Oil', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('5ffbe51f-123e-444a-a054-8dae80786fbb', 'Springs', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('6d705c9e-9635-491c-8af8-6b571b35c331', 'Cross Tyres', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('712a5fb5-a5b3-4654-ac50-2c452f4c138c', 'Garnishes', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('7fae398f-47c1-4179-ba23-df23e7ffbc7d', 'Segments', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('907fee3f-4f9c-4b05-9ce6-e8e1955b5aa3', 'Valves', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('a7d14482-81b8-4db9-a789-1883036e1842', 'Cylinder', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('c076ed51-e980-4ab5-8620-0f4985766e3e', 'RoadTires', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('c563e693-070f-402f-b8c1-7e3b42929c94', 'Brake Liquid', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('cb495987-2695-491b-88a3-50073fe61c95', 'Rear Shock', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('d2fa7a4f-6882-4ac4-9c79-259630f257da', 'Chain Drive', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('d90d26b5-3c43-4f6d-8586-133e7d789910', 'Transmission Oil', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('d2fa7a4f-6882-4ac4-9c79-259630f257d2', 'Fork', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('f810cb9c-cb90-4cb0-bf3a-c54ddb5c9240', 'Front Shock', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),
+       ('f9e70fb7-9d9c-4d6c-bdf6-39f02da8a56b', 'Pads', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc');
