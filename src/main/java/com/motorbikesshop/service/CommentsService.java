@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,8 +42,9 @@ public class CommentsService {
         comment.setAuthor(author);
         comment.setMessage(commentDto.getMessage());
         this.commentsRepository.save(comment);
+
         return new CommentsViewModel(comment.getId() ,author.getFirstName() + " " + author.getLastName(),
-                comment.getMessage(), comment.getCreated());
+                comment.getMessage(), localDateTimeToString(comment.getCreated()));
     }
 
     public List<CommentsViewModel> getAllCommentsForDiscussion(String id) {
@@ -51,8 +53,14 @@ public class CommentsService {
                 map(com -> {
                     CommentsViewModel viewModel = this.modelMapper.map(com, CommentsViewModel.class);
                     viewModel.setAuthor(com.getAuthor().getFirstName() + " " + com.getAuthor().getLastName());
+                    String dateToString = localDateTimeToString(com.getCreated());
+                    viewModel.setCreated(dateToString);
                     return viewModel;
                 }).
                 collect(Collectors.toList());
+    }
+
+    private String localDateTimeToString(LocalDateTime time) {
+        return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

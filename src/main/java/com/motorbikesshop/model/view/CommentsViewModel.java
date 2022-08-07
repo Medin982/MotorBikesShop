@@ -1,7 +1,5 @@
 package com.motorbikesshop.model.view;
 
-import java.time.LocalDateTime;
-
 public class CommentsViewModel {
 
     private String id;
@@ -10,23 +8,23 @@ public class CommentsViewModel {
 
     private String message;
 
-    private LocalDateTime created;
+    private String created;
 
     public CommentsViewModel() {
     }
 
-    public CommentsViewModel(String id, String author, String message, LocalDateTime created) {
+    public CommentsViewModel(String id, String author, String message, String created) {
         this.id = id;
         this.author = author;
         this.message = message;
         this.created = created;
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 

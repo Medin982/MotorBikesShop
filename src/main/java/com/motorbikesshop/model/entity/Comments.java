@@ -1,5 +1,7 @@
 package com.motorbikesshop.model.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -11,6 +13,7 @@ public class Comments extends BaseEntity{
     private String message;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     private LocalDateTime created;
 
     @ManyToOne

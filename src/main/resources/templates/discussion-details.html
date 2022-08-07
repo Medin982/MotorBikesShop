@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <title>Document</title>
@@ -16,7 +17,7 @@
 <nav th:replace="~{fragments/navBar}"></nav>
 
 <section>
-    <input type="hidden" name="discussionId" id="discussionId" th:value="${discussion.id}" >
+    <input type="hidden" name="discussionId" id="discussionId" th:value="${discussion.id}">
     <div class="container my-5 py-5">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12 col-lg-10 col-xl-8">
@@ -27,22 +28,22 @@
                     </h4>
                     <div class="card-body" id="commentCtr">
 
-<!--TODO: Share/Like/Comment -> Need to find how to implement to work correctly-->
+                        <!--TODO: Share/Like/Comment -> Need to find how to implement to work correctly-->
 
-<!--                        <div class="small d-flex justify-content-start">-->
-<!--                            <a href="#!" class="d-flex align-items-center me-3">-->
-<!--                                <i class="far fa-thumbs-up me-2"></i>-->
-<!--                                <p class="mb-0">Like</p>-->
-<!--                            </a>-->
-<!--                            <a href="#!" class="d-flex align-items-center me-3">-->
-<!--                                <i class="far fa-comment-dots me-2"></i>-->
-<!--                                <p class="mb-0">Comment</p>-->
-<!--                            </a>-->
-<!--                            <a href="#!" class="d-flex align-items-center me-3">-->
-<!--                                <i class="fas fa-share me-2"></i>-->
-<!--                                <p class="mb-0">Share</p>-->
-<!--                            </a>-->
-<!--                        </div>-->
+                        <!--                        <div class="small d-flex justify-content-start">-->
+                        <!--                            <a href="#!" class="d-flex align-items-center me-3">-->
+                        <!--                                <i class="far fa-thumbs-up me-2"></i>-->
+                        <!--                                <p class="mb-0">Like</p>-->
+                        <!--                            </a>-->
+                        <!--                            <a href="#!" class="d-flex align-items-center me-3">-->
+                        <!--                                <i class="far fa-comment-dots me-2"></i>-->
+                        <!--                                <p class="mb-0">Comment</p>-->
+                        <!--                            </a>-->
+                        <!--                            <a href="#!" class="d-flex align-items-center me-3">-->
+                        <!--                                <i class="fas fa-share me-2"></i>-->
+                        <!--                                <p class="mb-0">Share</p>-->
+                        <!--                            </a>-->
+                        <!--                        </div>-->
 
                     </div>
                     <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
@@ -50,26 +51,34 @@
                             <div class="form-outline w-100">
                                 <form id="commentForm" method="POST"
                                       action="/">
-                                    <div class="form-group">
-                                        <label for="message">Comment</label>
-                                        <textarea name="message"
-                                                  id="message"
-                                                  cols="30"
-                                                  rows="5"
-                                                  class="form-control"
-                                                  style="background-color: white;"></textarea>
-                                        <small id="messageError" class="invalid-feedback">
-                                            Message should be at least 10 characters.
-                                        </small>
-                                    </div>
-                                    <div class="float-end mt-2 pt-1">
-                                        <button type="submit" class="btn btn-primary btn-sm" id="postComment">Post comment</button>
-                                        <button type="submit" class="btn btn-outline-primary btn-sm">Cancel</button>
-                                    </div>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <div class="form-group">
+                                            <label for="message">Comment</label>
+                                            <textarea name="message"
+                                                      id="message"
+                                                      cols="30"
+                                                      rows="5"
+                                                      class="form-control"
+                                                      style="background-color: white;"></textarea>
+                                            <small id="messageError" class="invalid-feedback">
+                                                Message should be at least 10 characters.
+                                            </small>
+                                        </div>
+                                        <div class="float-end mt-2 pt-1">
+                                            <button type="submit" class="btn btn-primary btn-sm" id="postComment">Post
+                                                comment
+                                            </button>
+                                            <button type="submit" class="btn btn-outline-primary btn-sm">Cancel</button>
+                                        </div>
+                                    </th:block>
                                 </form>
                             </div>
                         </div>
 
+                    </div>
+                    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;"
+                         sec:authorize="isAnonymous()">
+                        <p>If you want to comment, need to <a href="/login">login</a> first!</p>
                     </div>
                 </div>
             </div>

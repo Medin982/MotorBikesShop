@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
@@ -20,7 +21,6 @@ public class DiscussionService {
 
     private final DiscussionRepository discussionRepository;
     private final ModelMapper modelMapper;
-
     private final UserRepository userRepository;
 
     public DiscussionService(DiscussionRepository discussionRepository, ModelMapper modelMapper, UserRepository userRepository) {
@@ -40,7 +40,12 @@ public class DiscussionService {
     public Page<DiscussionViewModel> getAll(Pageable pageable) {
         return this.discussionRepository.
                 findAll(pageable).
-                map(disc -> this.modelMapper.map(disc, DiscussionViewModel.class));
+                map(disc -> {
+                    DiscussionViewModel model = this.modelMapper.map(disc, DiscussionViewModel.class);
+                    String dateToString = disc.getCreated().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                    model.setCreated(dateToString);
+                    return model;
+                });
     }
 
     public DiscussionViewModel getDiscussion(String id) {

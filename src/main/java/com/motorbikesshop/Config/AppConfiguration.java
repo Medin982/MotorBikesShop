@@ -16,15 +16,15 @@ public class AppConfiguration {
 
     @Bean
     public ModelMapper modelMapper() {
-        //Custom Converter: String -> LocalDate
+        //Custom Converter: LocalDateTime -> String
 
         ModelMapper modelMapper = new ModelMapper();
-        Converter<String, LocalDate> toLocalDate = new AbstractConverter<String, LocalDate>() {
+        Converter<LocalDate, String> toLocalDate = new AbstractConverter<LocalDate, String>() {
             @Override
-            protected LocalDate convert(String source) {
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate date = LocalDate.parse(source ,format);
-                return date;
+            protected String convert(LocalDate source) {
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String dateToString = source.format(format);
+                return dateToString;
             }
         };
         return modelMapper;

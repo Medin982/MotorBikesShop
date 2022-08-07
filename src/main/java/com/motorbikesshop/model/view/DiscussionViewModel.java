@@ -1,9 +1,5 @@
 package com.motorbikesshop.model.view;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
-
 public class DiscussionViewModel {
 
     private String id;
@@ -14,14 +10,13 @@ public class DiscussionViewModel {
 
     private UserViewModel creator;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime created;
+    private String created;
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 

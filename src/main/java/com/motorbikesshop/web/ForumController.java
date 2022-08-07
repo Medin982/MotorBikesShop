@@ -40,6 +40,12 @@ public class ForumController {
         return "create-discussion";
     }
 
+    @GetMapping("/discussion/details/{id}")
+    public String discussionDetails(@PathVariable String id, Model model) {
+        model.addAttribute("discussion", this.discussionService.getDiscussion(id));
+        return "discussion-details";
+    }
+
     @PostMapping("/discussion/create")
     public String createDiscussion(@Valid CreateDiscussionDto createDiscussionDto,
                                    BindingResult bindingResult,
@@ -52,11 +58,5 @@ public class ForumController {
         }
         this.discussionService.createDiscussion(createDiscussionDto, principal);
         return "redirect:/forum/discussion";
-    }
-
-    @GetMapping("/discussion/details/{id}")
-    public String discussionDetails(@PathVariable String id, Model model) {
-        model.addAttribute("discussion", this.discussionService.getDiscussion(id));
-        return "discussion-details";
     }
 }

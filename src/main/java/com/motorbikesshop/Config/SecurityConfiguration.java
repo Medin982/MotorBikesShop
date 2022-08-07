@@ -26,7 +26,8 @@ public class SecurityConfiguration {
         http.
                 authorizeRequests().
                 requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                antMatchers("/", "/users/login", "/users/register", "/forum/discussion", "/parts/present",
+                antMatchers("/", "/users/login", "/users/register", "/forum/discussion",
+                        "/forum/discussion/details/{id}", "/parts/present", "/api/**",
                         "/announcement/present", "/announcement/details/{id}", "/about").permitAll().
                 anyRequest().
                 authenticated().
