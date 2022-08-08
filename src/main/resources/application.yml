@@ -25,7 +25,7 @@ spring:
 
   sql:
     init:
-      mode: always
+      mode: never
 
 cloudinary:
   api-key: 399433356635866

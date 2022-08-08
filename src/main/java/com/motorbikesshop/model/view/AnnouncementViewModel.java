@@ -13,8 +13,6 @@ public class AnnouncementViewModel {
 
     private ModelsViewModel model;
 
-    private String modification;
-
     private ImagesViewModel images;
 
     private ColorType color;
@@ -47,14 +45,6 @@ public class AnnouncementViewModel {
 
     public void setModel(ModelsViewModel model) {
         this.model = model;
-    }
-
-    public String getModification() {
-        return modification;
-    }
-
-    public void setModification(String modification) {
-        this.modification = modification;
     }
 
     public ImagesViewModel getImages() {

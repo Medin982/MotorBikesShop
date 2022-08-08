@@ -24,8 +24,6 @@ dependencies {
     implementation group: 'com.cloudinary', name: 'cloudinary', version: '1.0.2'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-    implementation 'com.cloudinary:cloudinary-core:1.32.2'
-    implementation 'com.cloudinary:cloudinary-taglib:1.32.2'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

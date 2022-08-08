@@ -1,15 +1,16 @@
 package com.motorbikesshop.service;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
+import com.motorbikesshop.model.dtos.SearchAnnouncementDTO;
 import com.motorbikesshop.model.entity.*;
 import com.motorbikesshop.model.view.AnnouncementDetailsViewModel;
 import com.motorbikesshop.model.view.AnnouncementViewModel;
 import com.motorbikesshop.repository.*;
+import com.motorbikesshop.repository.specification.AnnouncementSpecification;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -57,6 +58,16 @@ public class AnnouncementService {
         announcement.setAddress(address);
         announcement.setSeller(seller.get());
         return this.announcementRepository.save(announcement);
+    }
+
+    public List<AnnouncementViewModel> searchAnnouncements(SearchAnnouncementDTO dto) {
+        return this.announcementRepository.findAll(new AnnouncementSpecification(dto)).
+                stream()
+                .map(announcement -> {
+                    AnnouncementViewModel current = this.modelMapper.map(announcement, AnnouncementViewModel.class);
+                    current.setImages(this.imagesService.getImage(announcement.getId()));
+                    return current;
+                }).collect(Collectors.toList());
     }
 
     public Page<AnnouncementViewModel> getAll(Pageable pageable) {

@@ -2,26 +2,25 @@ package com.motorbikesshop.web;
 
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
 import com.motorbikesshop.model.dtos.EmailRequestDTO;
+import com.motorbikesshop.model.dtos.SearchAnnouncementDTO;
 import com.motorbikesshop.model.view.AnnouncementDetailsViewModel;
 import com.motorbikesshop.model.view.UserViewModel;
 import com.motorbikesshop.service.AnnouncementService;
 import com.motorbikesshop.service.BrandService;
 import com.motorbikesshop.service.EmailService;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/announcement")
@@ -61,7 +60,31 @@ public class AnnouncementController {
         return new RedirectView("/", true);
     }
 
-    @GetMapping("/present")
+    @GetMapping("/search")
+    public String searchQuery(Model model,
+                              @Valid SearchAnnouncementDTO searchAnnouncementDTO,
+                              BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("searchAnnouncement", searchAnnouncementDTO);
+            model.addAttribute(
+                    "org.springframework.validation.BindingResult.searchAnnouncement",
+                    bindingResult);
+            return "search-announcement";
+        }
+
+        if (!model.containsAttribute("searchAnnouncement")) {
+            model.addAttribute("searchAnnouncement", new SearchAnnouncementDTO());
+        }
+
+        if (!searchAnnouncementDTO.isEmpty()) {
+            model.addAttribute("present", this.announcementService.searchAnnouncements(searchAnnouncementDTO));
+        }
+        model.addAttribute("brands", this.brandService.getAll());
+        return "search-announcement";
+    }
+
+    @GetMapping("/all")
     public String present(Model model,
                           @PageableDefault(size = 15)
                           Pageable pageable) {
@@ -75,7 +98,7 @@ public class AnnouncementController {
         if (!model.containsAttribute("emailRequestDTO")) {
             model.addAttribute("emailRequestDTO", new EmailRequestDTO());
         }
-        model.addAttribute("detailsViewModel" ,this.announcementService.getAnnouncement(id));
+        model.addAttribute("detailsViewModel", this.announcementService.getAnnouncement(id));
         return "announcement-details";
     }
 

@@ -4,12 +4,14 @@ import com.motorbikesshop.model.entity.Announcement;
 import com.motorbikesshop.model.enums.ColorType;
 import com.motorbikesshop.model.view.AnnouncementViewModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface AnnouncementRepository extends JpaRepository<Announcement, String> {
+public interface AnnouncementRepository extends JpaRepository<Announcement, String>,
+        JpaSpecificationExecutor<Announcement> {
     List<Announcement> findTop5ByCreatedLessThanOrderByCreatedDesc(LocalDateTime now);
 }
