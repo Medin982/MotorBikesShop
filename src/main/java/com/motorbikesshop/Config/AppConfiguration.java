@@ -1,18 +1,24 @@
 package com.motorbikesshop.Config;
 
+import com.cloudinary.Cloudinary;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
+import java.util.Map;
 
 @Configuration
 public class AppConfiguration {
+
+    private final CloudinaryConfig cloudinaryConfig;
+
+    public AppConfiguration(CloudinaryConfig cloudinaryConfig) {
+        this.cloudinaryConfig = cloudinaryConfig;
+    }
 
     @Bean
     public ModelMapper modelMapper() {
@@ -28,5 +34,16 @@ public class AppConfiguration {
             }
         };
         return modelMapper;
+    }
+
+    @Bean
+    public Cloudinary cloudinary() {
+        return new Cloudinary(
+                Map.of(
+                        "cloud_name", cloudinaryConfig.getCloudName(),
+                        "api_key", cloudinaryConfig.getApiKey(),
+                        "api_secret", cloudinaryConfig.getApiSecret()
+                )
+        );
     }
 }

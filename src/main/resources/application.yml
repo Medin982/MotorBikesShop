@@ -1,28 +1,33 @@
 spring:
-    datasource:
-        driverClassName: com.mysql.cj.jdbc.Driver
-        password: 4759
-        url: jdbc:mysql://localhost:3306/MotorBikes?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-        username: root
-    jpa:
-        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-        defer-datasource-initialization: true
-        hibernate:
-            ddl-auto: update
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: 4759
+    url: jdbc:mysql://localhost:3306/MotorBikes?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
 
-    mail:
-        host: "localhost"
-        port: 1025
-        username: "motorBikeShop@mail.com"
-        password: ''
+  mail:
+    host: "localhost"
+    port: 1025
+    username: "motorBikeShop@mail.com"
+    password: ''
 
-    servlet:
-        multipart:
-            enabled: true
-            file-size-threshold: 2KB
-            max-file-size: 20MB
-            max-request-size: 25MB
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 20MB
+      max-request-size: 25MB
 
-    sql:
-        init:
-            mode: never
+  sql:
+    init:
+      mode: always
+
+cloudinary:
+  api-key: 399433356635866
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: deoduxqy0
