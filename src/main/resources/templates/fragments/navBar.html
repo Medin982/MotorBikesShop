@@ -23,7 +23,16 @@
                     </div>
                 </li>
                 <th:block sec:authorize="isAnonymous()">
-                    <li class="nav-item active">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/announcement/present">Announcement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/parts/present">Parts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/forum/discussion">Discussion</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/users/login">Login
                             <span class="sr-only">(current)</span>
                         </a>
@@ -57,19 +66,19 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Forum
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="/forum/discussion">Discussion</a></li>
+                                <li><a class="dropdown-item" href="/forum/discussion/create">Create Discussion</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </th:block>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                            Forum
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="/forum/discussion">Discussion</a></li>
-                            <li><a class="dropdown-item" href="/forum/discussion/create">Create Discussion</a></li>
-                        </ul>
-                    </div>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/forum">About</a>
                 </li>

@@ -37,7 +37,7 @@ public class ImagesService {
                     images.setUrl(fileName);
                     images.setAnnouncement(announcement);
                     Images savedImage = this.imagesRepository.save(images);
-                    String uploadDir = "announcement-photos/" + savedImage.getId();
+                    String uploadDir = "src/main/resources/static/images/announcement-photos/" + savedImage.getId();
                     try {
                         FileUploadUtilConfig.saveFile(uploadDir, fileName, img);
                     } catch (IOException e) {

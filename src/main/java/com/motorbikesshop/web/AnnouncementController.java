@@ -7,6 +7,7 @@ import com.motorbikesshop.model.view.UserViewModel;
 import com.motorbikesshop.service.AnnouncementService;
 import com.motorbikesshop.service.BrandService;
 import com.motorbikesshop.service.EmailService;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,7 @@ public class AnnouncementController {
     }
 
     @PostMapping("/add")
-    public RedirectView announcement(@RequestParam("images") List<MultipartFile> multipartFile,
-                                     @Valid AddAnnouncementDTO announcementDTO,
+    public RedirectView announcement(@Valid AddAnnouncementDTO announcementDTO,
                                      BindingResult bindingResult,
                                      RedirectAttributes redirectAttributes,
                                      Principal principal) throws IOException {
@@ -57,7 +57,7 @@ public class AnnouncementController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.announcementDTO", bindingResult);
             return new RedirectView("/announcement/add", true);
         }
-        this.announcementService.createAnnouncement(announcementDTO, principal, multipartFile);
+        this.announcementService.createAnnouncement(announcementDTO, principal);
         return new RedirectView("/", true);
     }
 

@@ -15,7 +15,7 @@ public class Images extends BaseEntity{
     @Transient
     public String getUrl() {
         if (url == null || getId() == null) return null;
-        return "/announcement-photos/" + getId() + "/" + url;
+        return "/src/main/resources/static/images/announcement-photos/" + getId() + "/" + url;
     }
 
     public void setUrl(String url) {

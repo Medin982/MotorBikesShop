@@ -40,14 +40,13 @@ public class AnnouncementService {
         this.modelMapper = modelMapper;
     }
 
-    public void createAnnouncement(AddAnnouncementDTO announcementDTO, Principal principal,
-                                   List<MultipartFile> multipartFile) throws IOException {
+    public void createAnnouncement(AddAnnouncementDTO announcementDTO, Principal principal) throws IOException {
         Optional<UserEntity> seller = this.userRepository.findByEmail(principal.getName());
         City city = this.cityService.createCity(announcementDTO.getCity(), announcementDTO.getPostCode());
         Address address = this.addressService.createAddresses(announcementDTO.getStreet(), announcementDTO.getStreetNumber(), city);
         Optional<Model> model = this.modelRepository.findById(announcementDTO.getModelId());
         Announcement announcement = initializerAnnouncement(announcementDTO, seller, address, model.get());
-        this.imagesService.createImages(multipartFile, announcement);
+        this.imagesService.createImages(announcementDTO.getImages(), announcement);
     }
 
     private Announcement initializerAnnouncement(AddAnnouncementDTO announcementDTO, Optional<UserEntity> seller,

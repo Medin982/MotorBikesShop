@@ -2,10 +2,12 @@ package com.motorbikesshop.model.dtos;
 
 import com.motorbikesshop.model.enums.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public class AddAnnouncementDTO {
 
@@ -63,6 +65,18 @@ public class AddAnnouncementDTO {
     @NotBlank
     @Size(min = 10)
     private String description;
+
+    @Size(min = 5, max = 5)
+    @NotNull
+    private List<MultipartFile> images;
+
+    public List<MultipartFile> getImages() {
+        return images;
+    }
+
+    public void setImages(List<MultipartFile> images) {
+        this.images = images;
+    }
 
     public String getModelId() {
         return modelId;

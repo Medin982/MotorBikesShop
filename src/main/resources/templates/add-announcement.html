@@ -277,11 +277,14 @@
                             <input class="form-control"
                                    type="file"
                                    id="images"
-                                   name="images"
+                                   th:field="*{images}"
+                                   th:errorclass="is-invalid"
+                                   min="5"
+                                   max="5"
                                    accept="image/jpeg, image/png"
                                    multiple/>
                             <p class="invalid-feedback errors alert alert-danger">
-                                Images is required.
+                                 Required 5 images.
                             </p>
                         </div>
 

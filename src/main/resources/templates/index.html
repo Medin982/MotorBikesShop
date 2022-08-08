@@ -11,7 +11,7 @@
 </div>
 
 <section>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" th:if="${latestAnnouncement.size() > 0}">
         <h5 class="d-flex justify-content-start text-white">Latest</h5>
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -20,7 +20,7 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
         </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner" th:if="${latestAnnouncement.size() > 0}">
             <div class="carousel-item active">
                 <img class="d-block w-100" th:src="${latestAnnouncement.get(0).images.url}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
@@ -32,7 +32,7 @@
                     <p th:text="|${latestAnnouncement.get(0).price} BGN|">Some information about product.</p>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" th:if="${latestAnnouncement.size() > 1}">
                 <img class="d-block w-100" th:src="${latestAnnouncement.get(1).images.url}" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
                     <a class="card-title align-text-bottom text-primary font-weight-bold"
@@ -43,7 +43,7 @@
                     <p th:text="|${latestAnnouncement.get(1).price} BGN|">Some information about product.</p>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" th:if="${latestAnnouncement.size() > 2}">
                 <img class="d-block w-100" th:src="${latestAnnouncement.get(2).images.url}" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
                     <a class="card-title align-text-bottom text-primary font-weight-bold"
@@ -54,7 +54,7 @@
                     <p th:text="|${latestAnnouncement.get(2).price} BGN|">Some information about product.</p>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" th:if="${latestAnnouncement.size() > 3}">
                 <img class="d-block w-100" th:src="${latestAnnouncement.get(3).images.url}" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
                     <a class="card-title align-text-bottom text-primary font-weight-bold"
@@ -65,14 +65,14 @@
                     <p th:text="|${latestAnnouncement.get(3).price} BGN|">Some information about product.</p>
                 </div>
             </div>
-            <!--        <div class="carousel-item">-->
-            <!--            <img class="d-block w-100" th:src="${latestAnnouncement.get(4).images.url}" alt="Second slide">-->
-            <!--            <div class="carousel-caption d-none d-md-block">-->
-            <!--                <h5 th:text="|${latestAnnouncement.get(4).model.brand.name} ${latestAnnouncement.get(4).model.name}|">Title</h5>-->
-            <!--                <p th:text="|${latestAnnouncement.get(4).mileage} KM|">Some information about product.</p>-->
-            <!--                <p th:text="|${latestAnnouncement.get(4).price} BGN|">Some information about product.</p>-->
-            <!--            </div>-->
-            <!--        </div>-->
+                    <div class="carousel-item" th:if="${latestAnnouncement.size() > 4}">
+                        <img class="d-block w-100" th:src="${latestAnnouncement.get(4).images.url}" alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5 th:text="|${latestAnnouncement.get(4).model.brand.name} ${latestAnnouncement.get(4).model.name}|">Title</h5>
+                            <p th:text="|${latestAnnouncement.get(4).mileage} KM|">Some information about product.</p>
+                            <p th:text="|${latestAnnouncement.get(4).price} BGN|">Some information about product.</p>
+                        </div>
+                    </div>
         </div>
 
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
