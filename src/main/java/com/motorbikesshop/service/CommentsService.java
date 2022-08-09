@@ -63,4 +63,8 @@ public class CommentsService {
     private String localDateTimeToString(LocalDateTime time) {
         return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
+
+    public void deleteComment(Comments com) {
+        this.commentsRepository.delete(com);
+    }
 }

@@ -26,6 +26,13 @@
                         style="margin-top: 20px">
                         <th:block th:text="${discussion.name}"></th:block>
                     </h4>
+                    <div class="text-danger font-weight-bold d-flex justify-content-center"
+                         sec:authorize="hasRole('ADMIN')">
+                        <form th:action="@{/forum/discussion/delete/{id}(id = *{id})}"
+                              th:method="delete">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </div>
                     <div class="card-body" id="commentCtr">
 
                         <!--TODO: Share/Like/Comment -> Need to find how to implement to work correctly-->

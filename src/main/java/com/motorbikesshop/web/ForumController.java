@@ -4,13 +4,11 @@ import com.motorbikesshop.model.dtos.CreateDiscussionDto;
 import com.motorbikesshop.service.DiscussionService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -57,6 +55,13 @@ public class ForumController {
             return "redirect:/forum/discussion/create";
         }
         this.discussionService.createDiscussion(createDiscussionDto, principal);
+        return "redirect:/forum/discussion";
+    }
+
+    @PreAuthorize("@discussionService.isCreatorOrAdmin(#principal.name, #id)")
+    @DeleteMapping("/discussion/delete/{id}")
+    public String deleteDiscussionById(@PathVariable String id, Principal principal) {
+        this.discussionService.deleteById(id);
         return "redirect:/forum/discussion";
     }
 }

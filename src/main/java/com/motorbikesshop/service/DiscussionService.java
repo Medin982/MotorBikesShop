@@ -3,6 +3,7 @@ package com.motorbikesshop.service;
 import com.motorbikesshop.model.dtos.CreateDiscussionDto;
 import com.motorbikesshop.model.entity.Discussion;
 import com.motorbikesshop.model.entity.UserEntity;
+import com.motorbikesshop.model.enums.UserRoleEnum;
 import com.motorbikesshop.model.view.DiscussionViewModel;
 import com.motorbikesshop.repository.DiscussionRepository;
 import com.motorbikesshop.repository.UserRepository;
@@ -20,11 +21,14 @@ import java.util.Optional;
 public class DiscussionService {
 
     private final DiscussionRepository discussionRepository;
+
+    private final CommentsService commentsService;
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-    public DiscussionService(DiscussionRepository discussionRepository, ModelMapper modelMapper, UserRepository userRepository) {
+    public DiscussionService(DiscussionRepository discussionRepository, CommentsService commentsService, ModelMapper modelMapper, UserRepository userRepository) {
         this.discussionRepository = discussionRepository;
+        this.commentsService = commentsService;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
     }
@@ -53,5 +57,30 @@ public class DiscussionService {
                 findById(id).
                 map(discussion -> this.modelMapper.map(discussion, DiscussionViewModel.class)).
                 orElse(null);
+    }
+
+    public void deleteById(String id) {
+        Optional<Discussion> discussion = this.discussionRepository.findById(id);
+        discussion.get().
+                getComments().
+                forEach(this.commentsService::deleteComment);
+        this.discussionRepository.delete(discussion.get());
+    }
+
+    public boolean isCreatorOrAdmin(String email, String id) {
+        boolean isCreator = discussionRepository.
+                findById(id).
+                filter(dis -> dis.getCreator().getEmail().equals(email)).
+                isPresent();
+
+        if (isCreator) {
+            return true;
+        }
+
+        return userRepository.
+                findByEmail(email).
+                stream().
+                anyMatch(u -> u.getRole().getName().equals(UserRoleEnum.ADMIN));
+
     }
 }
