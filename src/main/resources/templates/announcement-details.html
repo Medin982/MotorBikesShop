@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +27,6 @@
 </div>
 
 <section class="container" th:object="${detailsViewModel}">
-    <!--    TODO:Find a way how to present unlimited numbers images to client. -->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -232,8 +232,15 @@
         </div>
     </div>
 </section>
+<!--TODO: Hide or display if logged user is admin or is owner-->
+    <div class="card-body text-danger font-weight-bold" sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/announcement/delete/{id}(id = *{id})}"
+              th:method="delete">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
 
-<footer th:replace="~{fragments/footer}"></footer>
+<footer th:replace=" ~{fragments/footer}"></footer>
 <th:block th:replace="~{fragments/scripts}"></th:block>
 </body>
 </html>

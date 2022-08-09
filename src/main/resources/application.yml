@@ -27,6 +27,11 @@ spring:
     init:
       mode: never
 
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
+
 cloudinary:
   api-key: 399433356635866
   api-secret: ${CLOUDINARY_API_SECRET}

@@ -10,6 +10,7 @@ import com.motorbikesshop.service.BrandService;
 import com.motorbikesshop.service.EmailService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -92,12 +93,20 @@ public class AnnouncementController {
         return "all-announcement";
     }
 
+    @PreAuthorize("@announcementService.isOwner(#principal.name, #id)")
+    @DeleteMapping("/delete/{id}")
+    public String deleteAnnouncement(@PathVariable String id, Principal principal) {
+        this.announcementService.deleteAnnouncementById(id);
+        return "redirect:/announcement/all";
+    }
+
     @GetMapping("/details/{id}")
     public String announcementDetails(@PathVariable String id,
                                       Model model) {
         if (!model.containsAttribute("emailRequestDTO")) {
             model.addAttribute("emailRequestDTO", new EmailRequestDTO());
         }
+
         model.addAttribute("detailsViewModel", this.announcementService.getAnnouncement(id));
         return "announcement-details";
     }

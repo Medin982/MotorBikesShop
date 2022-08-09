@@ -4,10 +4,11 @@
 
 ### **Technologies used:**
 *  MySQL
-*  Thymealeaf
+*  Thymeleaf
 *  Bootstrap
 *  HTML&CSS
 *  Spring Boot
+*  Cloudinary
 *  Font Awesome Icons
 
 ### **Functionality**

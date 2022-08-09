@@ -1,3 +1,12 @@
+insert into users_roles
+values ('5d0fd008-cfee-4301-ae30-f03244e2e39a', 'USER'),
+       ('79bb0f75-3397-4f26-8afa-39e44dc6038f', 'ADMIN');
+
+insert into users
+values ('65b65a3d-b0d6-4344-ad21-022bac8ca0c2', 'agata@abv.bg', 'Medin', 'Tarakchiev',
+        'ca034dee7f2ab6ec995e1257add7f0521a84039429a33766b568d86f4b4fe038bfc92c783099eeec',
+        087729680, '79bb0f75-3397-4f26-8afa-39e44dc6038f');
+
 insert into brands
 values ('70d14389-0a78-4239-aecd-79aa5d824e0d', 'KTM'),
        ('77221405-b41c-4933-9602-b0f05029a312', 'Aprillia'),

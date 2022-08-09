@@ -81,4 +81,8 @@ public class ImagesService {
                 findFirstByAnnouncementId(id);
         return this.modelMapper.map(firstByAnnouncementId.get(), ImagesViewModel.class);
     }
+
+    public void deleteById(String id) {
+        this.imagesRepository.deleteById(id);
+    }
 }

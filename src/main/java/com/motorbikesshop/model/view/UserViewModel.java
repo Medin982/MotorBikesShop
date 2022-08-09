@@ -2,6 +2,8 @@ package com.motorbikesshop.model.view;
 
 public class UserViewModel {
 
+    private String id;
+
     private String firstName;
 
     private String lastName;
@@ -9,6 +11,14 @@ public class UserViewModel {
     private int phoneNumber;
 
     private String email;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

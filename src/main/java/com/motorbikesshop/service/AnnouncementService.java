@@ -3,6 +3,7 @@ package com.motorbikesshop.service;
 import com.motorbikesshop.model.dtos.AddAnnouncementDTO;
 import com.motorbikesshop.model.dtos.SearchAnnouncementDTO;
 import com.motorbikesshop.model.entity.*;
+import com.motorbikesshop.model.enums.UserRoleEnum;
 import com.motorbikesshop.model.view.AnnouncementDetailsViewModel;
 import com.motorbikesshop.model.view.AnnouncementViewModel;
 import com.motorbikesshop.repository.*;
@@ -27,17 +28,20 @@ public class AnnouncementService {
     private final ImagesService imagesService;
     private final ModelRepository modelRepository;
     private final UserRepository userRepository;
+    private final CloudinaryService cloudinary;
     private final ModelMapper modelMapper;
 
     public AnnouncementService(AnnouncementRepository announcementRepository, AddressService addressService,
                                CityService cityService, ImagesService imagesService,
-                               ModelRepository modelRepository, UserRepository userRepository, ModelMapper modelMapper) {
+                               ModelRepository modelRepository, UserRepository userRepository,
+                               CloudinaryService cloudinary, ModelMapper modelMapper) {
         this.announcementRepository = announcementRepository;
         this.addressService = addressService;
         this.cityService = cityService;
         this.imagesService = imagesService;
         this.modelRepository = modelRepository;
         this.userRepository = userRepository;
+        this.cloudinary = cloudinary;
         this.modelMapper = modelMapper;
     }
 
@@ -82,7 +86,7 @@ public class AnnouncementService {
 
     public AnnouncementDetailsViewModel getAnnouncement(String id) {
         return this.announcementRepository.findById(id).
-        map(announcement -> this.modelMapper.map(announcement, AnnouncementDetailsViewModel.class)).
+                map(announcement -> this.modelMapper.map(announcement, AnnouncementDetailsViewModel.class)).
                 orElseThrow();
     }
 
@@ -96,5 +100,33 @@ public class AnnouncementService {
                     return current;
                 }).
                 collect(Collectors.toList());
+    }
+
+    public void deleteAnnouncementById(String id) {
+        Optional<Announcement> announcement = this.announcementRepository.findById(id);
+        List<Images> images = announcement.get().getImages();
+        images.
+                forEach(img -> {
+                    this.cloudinary.delete(img.getPublicId());
+                    this.imagesService.deleteById(img.getId());
+                });
+        this.announcementRepository.delete(announcement.get());
+    }
+
+    public boolean isOwner(String email, String id) {
+        boolean isOwner = announcementRepository.
+                findById(id).
+                filter(ann -> ann.getSeller().getEmail().equals(email)).
+                isPresent();
+
+        if (isOwner) {
+            return true;
+        }
+
+        return userRepository.
+                findByEmail(email).
+                stream().
+                anyMatch(u -> u.getRole().getName().equals(UserRoleEnum.ADMIN));
+
     }
 }
