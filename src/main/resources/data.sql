@@ -168,13 +168,13 @@ values ('70d14389-0a78-4239-aecd-79aa5d824e01', 'SX', '70d14389-0a78-4239-aecd-7
        ('70d14389-0a78-4239-aecd-79aa5d824141', 'V-STORM', 'f8945747-e830-4ba2-9c96-e613c0bc8b5c');
 
 insert into parts_categories
-values ('2240cd9f-bcba-40c8-a0ab-03fceab5f02a', 'Tyres'),
-       ('3c35a23b-c230-4874-835e-648a8005b936', 'Brake System'),
-       ('40ccd09a-6167-4c7b-bcfb-cf4d4af4675d', 'Plastics'),
-       ('5677c10b-f481-47bf-830c-f160bd28b8e5', 'Accessories'),
-       ('8d501921-3045-4667-800b-7420b12d7064', 'Suspension'),
-       ('8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc', 'Engine'),
-       ('deae8d73-b6c7-42f6-918c-0748fae51629', 'Oil');
+values ('2240cd9f-bcba-40c8-a0ab-03fceab5f02a', 'TYRES'),
+       ('3c35a23b-c230-4874-835e-648a8005b936', 'BRAKESYSTEM'),
+       ('40ccd09a-6167-4c7b-bcfb-cf4d4af4675d', 'PLASTICS'),
+       ('5677c10b-f481-47bf-830c-f160bd28b8e5', 'ACCESSORIES'),
+       ('8d501921-3045-4667-800b-7420b12d7064', 'SUSPENSION'),
+       ('8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc', 'ENGINE'),
+       ('deae8d73-b6c7-42f6-918c-0748fae51629', 'OIL');
 
 insert into parts_sub_categories
 values ('0081678c-3592-4db9-b6cb-e3544ad54d9a', 'Crankshaft', '8f1d79b4-e5dd-4b26-82ab-ac520cbb6fbc'),

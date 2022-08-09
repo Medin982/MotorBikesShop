@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "parts")
-public class Part extends BaseEntity{
+public class Part extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
