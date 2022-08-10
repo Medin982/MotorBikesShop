@@ -24,7 +24,7 @@ public class AddAnnouncementDTO {
     private MotorBikesType category;
 
     @NotNull
-    private ConditionType condition;
+    private ConditionType conditions;
 
     @NotNull
     private ColorType color;
@@ -126,12 +126,12 @@ public class AddAnnouncementDTO {
         this.category = category;
     }
 
-    public ConditionType getCondition() {
-        return condition;
+    public ConditionType getConditions() {
+        return conditions;
     }
 
-    public void setCondition(ConditionType condition) {
-        this.condition = condition;
+    public void setConditions(ConditionType conditions) {
+        this.conditions = conditions;
     }
 
     public ColorType getColor() {

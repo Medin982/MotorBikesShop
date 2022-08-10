@@ -171,14 +171,6 @@ public class Announcement extends BaseEntity{
         this.mileage = mileage;
     }
 
-    public ConditionType getCondition() {
-        return conditions;
-    }
-
-    public void setCondition(ConditionType condition) {
-        this.conditions = condition;
-    }
-
     public ColorType getColor() {
         return color;
     }

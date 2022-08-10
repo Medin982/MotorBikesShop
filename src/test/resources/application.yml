@@ -1,22 +1,25 @@
+cloudinary:
+    api-key: 399433356635866
+    api-secret: ${CLOUDINARY_API_SECRET}
+    cloud-name: deoduxqy0
 spring:
-  jpa:
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: update
-
-  mail:
-    host: "localhost"
-    port: 1025
-    username: "motorBikeShop@mail.com"
-    password: ''
-
-  servlet:
-    multipart:
-      enabled: false
-      file-size-threshold: 2KB
-      max-file-size: 20MB
-      max-request-size: 25MB
-
-  sql:
-    init:
-      mode: never
+    datasource:
+        url: "jdbc:hsqldb:mem:testdb;sql.syntax_pgs=true"
+    jpa:
+        defer-datasource-initialization: true
+        hibernate:
+            ddl-auto: update
+    mail:
+        host: localhost
+        password: ''
+        port: 1025
+        username: motorBikeShop@mail.com
+    servlet:
+        multipart:
+            enabled: false
+            file-size-threshold: 2KB
+            max-file-size: 20MB
+            max-request-size: 25MB
+    sql:
+        init:
+            mode: never

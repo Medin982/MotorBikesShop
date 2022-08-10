@@ -104,14 +104,14 @@
                                 <label class="text-center text-warning font-weight-bold"
                                        for="condition">Condition</label>
                                 <select id="condition"
-                                        th:field="*{condition}"
+                                        th:field="*{conditions}"
                                         th:errorclass="is-invalid"
                                         class="form-control">
                                     <option value="">- Select condition type -</option>
                                     <option th:each="condition : ${T(com.motorbikesshop.model.enums.ConditionType).values()}"
                                             th:text="${condition}"
                                             th:value="${condition}"
-                                            th:selected="${condition} == *{condition}">
+                                            th:selected="${condition} == *{conditions}">
                                         Condition
                                     </option>
                                 </select>
