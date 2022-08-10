@@ -27,7 +27,21 @@
                         <a class="nav-link" href="/announcement/search">Announcement</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/parts/present">Parts</a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton4"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Parts
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" th:href="@{/parts/{category}(category = 'Engine')}">Engine Parts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/parts/{category}(category = 'Tyres')}">Tyres Parts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/parts/{category}(category = 'BrakeSystem')}">Brake System Parts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/parts/{category}(category = 'Plastics')}">Plastics Parts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/parts/{category}(category = 'Accessories')}">Accessories Parts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/parts/{category}(category = 'Suspension')}">Suspension Parts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/parts/{category}(category = 'Oil')}">Oil Parts</a></li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/forum/discussion">Discussion</a>

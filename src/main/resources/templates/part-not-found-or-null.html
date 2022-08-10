@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>No Such</title>
+</head>
+<body>
+<nav th:replace="~{fragments/navBar}"></nav>
+
+<h3 class="justify-content-center d-flex text-white"
+style="margin-top: 100px;">
+    NOT FOUND! Maybe you try something else.
+</h3>
+
+<footer th:include="~{fragments/footer}"></footer>
+<th:block th:replace="~{fragments/scripts}"></th:block>
+</body>
+</html>

@@ -12,7 +12,6 @@ public class PageNotFoundAdvise {
 
     @ExceptionHandler({PageNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-
     public ModelAndView onPageNotFound(PageNotFoundException pnfe) {
         return new ModelAndView("404");
     }

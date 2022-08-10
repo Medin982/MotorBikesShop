@@ -14,19 +14,18 @@
 <body>
 <nav th:replace="~{fragments/navBar}"></nav>
 
-
 <div class="container-fluid" style="margin-top: 80px">
     <div class="offers row mx-auto d-flex flex-row justify-content-center">
-        <div th:each="current : ${parts.getContent()}" th:object="${current}"
+        <div th:each="current : ${parts}" th:object="${current}"
              class="offer card col-sm-7 col-md-3  col-lg-2 m-1 p-0 bg-dark">
             <div class="card-img-top-wrapper">
-                <img class="img-thumbnail" th:src="*{imageUrl}" alt="Car image">
+                <img class="img-thumbnail" th:src="*{imageUrl}" alt="Parts image">
             </div>
             <div class="card-body pb-1">
+                <!--                   TODO:Implement details page-->
                 <a class="card-title align-text-bottom text-light font-weight-bold"
-                   th:href="@{/announcement/details/{id}(id = *{id})}"
-                   th:text="*{name}">
-                    Brand name Model name</a>
+                   th:href="@{/parts/details/{id}(id = *{id})}"
+                   th:text="*{name}">Part name</a>
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item text-warning bg-dark">
@@ -36,11 +35,11 @@
                     </div>
                     <div class="card-text"
                          name="description"
-                         th:text="|Description - *{description} Km|">
+                         th:text="|Description - *{description}|">
                     </div>
                     <div class="card-text"
                          name="engineType"
-                             th:text="|Category - *{category.name}|">
+                         th:text="|Category - *{category.name}|">
                     </div>
                 </li>
             </ul>
@@ -48,41 +47,10 @@
     </div>
 </div>
 
-<div class="container-fluid row justify-content-center">
-    <ul class="pagination">
-        <li class="page-item" th:classappend="${parts.isFirst()} ? 'disabled' : ''">
-            <a th:unless="${parts.isFirst()}"
-               th:href="@{/parts/present(size=${parts.getSize()},page=0)}"
-               class="page-link">First</a>
-        </li>
-        <li class="page-item" th:classappend="${parts.hasPrevious()} ? '' : 'disabled'">
-            <a class="page-link"
-               th:href="@{/parts/present(size=${parts.getSize()},page=${parts.getNumber() - 1})}"
-               aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>
-        </li>
-        <li class="page-item active">
-            <a class="page-link"
-               th:href="@{/parts/present(size=${parts.getSize()},page=${parts.getNumber()})}"
-               th:text="${parts.getNumber() + 1}">Current page</a>
-        </li>
-        <li class="page-item" th:classappend="${parts.hasNext()} ? '' : 'disabled'">
-            <a class="page-link"
-               th:href="@{/parts/present(size=${parts.getSize()},page=${parts.getNumber() + 1})}"
-               aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>
-        <li class="page-item" th:classappend="${parts.isLast()} ? 'disabled' : ''">
-            <a th:unless="${parts.isLast()}"
-               th:href="@{/parts/present(size=${parts.getSize()},page=${parts.getTotalPages() - 1})}"
-               class="page-link">Last</a>
-        </li>
-    </ul>
-</div>
+<h3 class="justify-content-center d-flex text-white"
+    th:if="${parts.size() == 0}">
+    No such result!!!
+</h3>
 
 <footer th:include="~{fragments/footer}"></footer>
 <th:block th:replace="~{fragments/scripts}"></th:block>
