@@ -22,6 +22,8 @@ public class TestData {
     private final ImagesRepository imagesRepository;
     private final AddressRepository addressRepository;
     private final CityRepository cityRepository;
+    private final DiscussionRepository discussionRepository;
+    private final CommentsRepository commentsRepository;
 
     public TestData(UserRepository userRepository,
                     RoleRepository roleRepository,
@@ -30,7 +32,9 @@ public class TestData {
                     ModelRepository modelRepository,
                     ImagesRepository imagesRepository,
                     AddressRepository addressRepository,
-                    CityRepository cityRepository) {
+                    CityRepository cityRepository,
+                    DiscussionRepository discussionRepository,
+                    CommentsRepository commentsRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.announcementRepository = announcementRepository;
@@ -39,6 +43,8 @@ public class TestData {
         this.imagesRepository = imagesRepository;
         this.addressRepository = addressRepository;
         this.cityRepository = cityRepository;
+        this.discussionRepository = discussionRepository;
+        this.commentsRepository = commentsRepository;
     }
 
     private void initRoles() {
@@ -111,7 +117,7 @@ public class TestData {
 
     public Images initTestImages() {
         var testImage = new Images();
-        testImage.setUrl("http://image/sads");
+        testImage.setUrl("https://www.collinsdictionary.com/images/full/motorbike_69587620.jpg");
         testImage.setPublicId("imagePublicId");
 
         return this.imagesRepository.save(testImage);
@@ -140,11 +146,31 @@ public class TestData {
         return this.announcementRepository.save(testAnnouncement);
     }
 
+    public Discussion initTestDiscussion(UserEntity creator) {
+        var testDiscussion = new Discussion();
+        testDiscussion.setName("testDiscussion");
+        testDiscussion.setCreated(LocalDateTime.now());
+        testDiscussion.setCreator(creator);
+        return this.discussionRepository.save(testDiscussion);
+    }
+
+    public Comments initTestComments(UserEntity author, Discussion discussion) {
+        var testComment = new Comments();
+        testComment.setMessage("testComments");
+        testComment.setAuthor(author);
+        testComment.setDiscussions(discussion);
+        testComment.setCreated(LocalDateTime.now());
+
+        return this.commentsRepository.save(testComment);
+    }
+
     public void clearTestDate() {
         announcementRepository.deleteAll();
         addressRepository.deleteAll();
         cityRepository.deleteAll();
         imagesRepository.deleteAll();
+        commentsRepository.deleteAll();
+        discussionRepository.deleteAll();
         userRepository.deleteAll();
         roleRepository.deleteAll();
         modelRepository.deleteAll();
