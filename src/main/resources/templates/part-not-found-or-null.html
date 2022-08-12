@@ -19,7 +19,7 @@ style="margin-top: 100px;">
     NOT FOUND! Maybe you try something else.
 </h3>
 
-<footer th:include="~{fragments/footer}"></footer>
+<footer th:replace="~{fragments/footer :: footer-user}"></footer>
 <th:block th:replace="~{fragments/scripts}"></th:block>
 </body>
 </html>

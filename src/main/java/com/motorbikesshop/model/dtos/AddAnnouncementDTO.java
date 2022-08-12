@@ -66,7 +66,7 @@ public class AddAnnouncementDTO {
     @Size(min = 10)
     private String description;
 
-    @Size(min = 5, max = 5)
+    @Size(min = 2, max = 5)
     @NotNull
     private List<MultipartFile> images;
 

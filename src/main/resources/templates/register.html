@@ -93,14 +93,6 @@
 <!--                                          class="text-danger">Error message</small>-->
 <!--                               </th:block>-->
                             </div>
-
-                            <div class="form-check d-flex justify-content-center mb-5 text-warning">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg"/>
-                                <label class="form-check-label" for="form2Example3cg">
-                                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                                </label>
-                            </div>
-
                             <div class="d-flex justify-content-center">
                                 <button type="submit"
                                         class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register
@@ -120,7 +112,7 @@
     </div>
 </div>
 
-<footer th:include="~{fragments/footer}"></footer>
+<footer th:replace="~{fragments/footer :: footer-user}"></footer>
 <th:block th:replace="~{fragments/scripts}"></th:block>
 </body>
 </html>

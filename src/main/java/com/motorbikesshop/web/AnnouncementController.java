@@ -101,12 +101,13 @@ public class AnnouncementController {
 
     @GetMapping("/details/{id}")
     public String announcementDetails(@PathVariable String id,
-                                      Model model) {
+                                      Model model, Principal principal) {
         if (!model.containsAttribute("emailRequestDTO")) {
             model.addAttribute("emailRequestDTO", new EmailRequestDTO());
         }
 
         model.addAttribute("detailsViewModel", this.announcementService.getAnnouncement(id));
+        model.addAttribute("user", principal.getName());
         return "announcement-details";
     }
 

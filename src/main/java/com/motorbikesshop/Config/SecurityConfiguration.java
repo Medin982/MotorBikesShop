@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 antMatchers("/", "/users/**", "/forum/discussion",
                         "/forum/discussion/details/{id}", "/parts/**", "/api/**",
                         "/announcement/all/**","/announcement/search",
-                        "/announcement/details/{id}", "/about").permitAll().
+                        "/announcement/details/{id}", "/about/**").permitAll().
                 anyRequest().
                 authenticated().
                 and().

@@ -7,15 +7,15 @@
 
 <div class="container-fluid">
     <h1 class="text-center text-warning mt-5">MotorBike Shop</h1>
-    <h4 class="text-center text-white">Find your first motorcycle!</h4>
 </div>
 
-<section>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" th:if="${latestAnnouncement.size() > 0}">
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
+         th:if="${latestAnnouncement.size() > 0}">
         <h5 class="d-flex justify-content-start text-white">Latest</h5>
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
@@ -65,14 +65,15 @@
                     <p th:text="|${latestAnnouncement.get(3).price} BGN|">Some information about product.</p>
                 </div>
             </div>
-                    <div class="carousel-item" th:if="${latestAnnouncement.size() > 4}">
-                        <img class="d-block w-100" th:src="${latestAnnouncement.get(4).images.url}" alt="Second slide">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5 th:text="|${latestAnnouncement.get(4).model.brand.name} ${latestAnnouncement.get(4).model.name}|">Title</h5>
-                            <p th:text="|${latestAnnouncement.get(4).mileage} KM|">Some information about product.</p>
-                            <p th:text="|${latestAnnouncement.get(4).price} BGN|">Some information about product.</p>
-                        </div>
-                    </div>
+            <div class="carousel-item" th:if="${latestAnnouncement.size() > 4}">
+                <img class="d-block w-100" th:src="${latestAnnouncement.get(4).images.url}" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 th:text="|${latestAnnouncement.get(4).model.brand.name} ${latestAnnouncement.get(4).model.name}|">
+                        Title</h5>
+                    <p th:text="|${latestAnnouncement.get(4).mileage} KM|">Some information about product.</p>
+                    <p th:text="|${latestAnnouncement.get(4).price} BGN|">Some information about product.</p>
+                </div>
+            </div>
         </div>
 
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -84,12 +85,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <h3 class="info text-warning align-content-center">Looking for a new bike? Welcome to the largest website for bikes in
-        Bulgaria, your bike is one
-        <a th:href="@{/announcement/present}">click</a> away. If you already have a bike and want to sell it, you are in the right place.
-        <a th:href="@{/announcement/add}"> Upload your bike quickly and easily.</a>
-    </h3>
-</section>
 
 <footer th:replace="~{fragments/footer}"></footer>
 <th:block th:replace="~{fragments/scripts}"></th:block>

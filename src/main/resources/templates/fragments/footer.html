@@ -1,27 +1,31 @@
 <footer class="bottom text-warning">
-    <!-- Grid container -->
     <div class="container p-1 pb-lg-1">
-        <!-- Section: Social media -->
-<!--        <section class="mb-4">-->
-<!--            &lt;!&ndash; Facebook &ndash;&gt;-->
-<!--            <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"-->
-<!--            ><i class="fa-brands fa-facebook-f"></i-->
-<!--            ></a>-->
-<!--            &lt;!&ndash; Twitter &ndash;&gt;-->
-<!--            <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"-->
-<!--            ><i class="fab fa-twitter"></i-->
-<!--            ></a>-->
-<!--            &lt;!&ndash; Instagram &ndash;&gt;-->
-<!--            <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"-->
-<!--            ><i class="fab fa-instagram"></i-->
-<!--            ></a>-->
-<!--        </section>-->
-        <!-- Section: Social media -->
+        <h2 class="d-flex justify-content-center text-white">About</h2>
+        <h3 class="info text-warning align-content-center">Looking for a new bike? Welcome to the largest website
+            for bikes in
+            Bulgaria, your bike is one
+            <a th:href="@{/announcement/present}">click</a> away. If you already have a bike and want to sell it,
+            you are in the right place.
+            <a th:href="@{/announcement/add}"> Upload your bike quickly and easily.</a>
+        </h3>
+        <h4 class="d-flex justify-content-center text-white">Contact Us:</h4>
+        <section class="font mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <!-- Twitter -->
+            <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <!-- Instagram -->
+            <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </section>
     </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
-    <div class="text-center p-3">
+    <div th:fragment="footer-user"
+         class="text-center text-warning p-3">
         © 2022 Copyright:
         <a class="text-white">Medin Tarakchiev</a>
     </div>

@@ -49,8 +49,8 @@ public class UserController {
         }
         this.userService.registerUser(registerDTO);
 //        TODO: If you want to sent email for registration.
-//        this.emailService.sendRegistrationEmail(registerDTO.getEmail(),
-//                registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        this.emailService.sendRegistrationEmail(registerDTO.getEmail(),
+                registerDTO.getFirstName() + " " + registerDTO.getLastName());
         return "redirect:login";
     }
 }

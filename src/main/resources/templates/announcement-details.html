@@ -29,26 +29,31 @@
 <section class="container" th:object="${detailsViewModel}">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"
+                th:if="${detailsViewModel.images.size() > 0}"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"
+                th:if="${detailsViewModel.images.size() > 1}"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"
+                th:if="${detailsViewModel.images.size() > 2}"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"
+                th:if="${detailsViewModel.images.size() > 3}"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="5"
+                th:if="${detailsViewModel.images.size() > 4}"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item active" th:if="${detailsViewModel.images.size() > 0}">
                 <img class="d-block w-100" th:src="${detailsViewModel.images.get(0).url}" alt="First slide">
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" th:if="${detailsViewModel.images.size() > 1}">
                 <img class="d-block w-100" th:src="${detailsViewModel.images.get(1).url}" alt="Second slide">
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" th:if="${detailsViewModel.images.size() > 2}">
                 <img class="d-block w-100" th:src="${detailsViewModel.images.get(2).url}" alt="Second slide">
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" th:if="${detailsViewModel.images.size() > 3}">
                 <img class="d-block w-100" th:src="${detailsViewModel.images.get(3).url}" alt="Second slide">
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" th:if="${detailsViewModel.images.size() > 4}">
                 <img class="d-block w-100" th:src="${detailsViewModel.images.get(4).url}" alt="Second slide">
             </div>
         </div>
@@ -232,15 +237,23 @@
         </div>
     </div>
 </section>
-<!--TODO: Hide or display if logged user is admin or is owner-->
-    <div class="card-body text-danger font-weight-bold" sec:authorize="hasRole('ADMIN')">
-        <form th:action="@{/announcement/delete/{id}(id = *{id})}"
-              th:method="delete">
-            <input type="submit" value="Delete">
-        </form>
-    </div>
+<!--It works,but we display two delete button if user is admin and is owner.-->
+<div class="card-body text-danger font-weight-bold"
+     th:if="${user} == ${detailsViewModel.seller.email}">
+    <form th:action="@{/announcement/delete/{id}(id = *{id})}"
+          th:method="delete">
+        <input type="submit" value="Delete">
+    </form>
+</div>
+<div class="card-body text-danger font-weight-bold"
+     sec:sec:authorize="hasRole('ADMIN')">
+    <form th:action="@{/announcement/delete/{id}(id = *{id})}"
+          th:method="delete">
+        <input type="submit" value="Delete">
+    </form>
+</div>
 
-<footer th:replace=" ~{fragments/footer}"></footer>
+<footer th:replace="~{fragments/footer :: footer-user}"></footer>
 <th:block th:replace="~{fragments/scripts}"></th:block>
 </body>
 </html>
