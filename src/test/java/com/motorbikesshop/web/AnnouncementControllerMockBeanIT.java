@@ -115,6 +115,7 @@ public class AnnouncementControllerMockBeanIT {
     }
 
     @Test
+    @WithMockUser(username = "user@mail.com", roles = "USER")
     void testAnnouncementDetailsPageShow() throws Exception {
         mockMvc.perform(get("/announcement/details/{id}", testAnnouncement.getId()).
                        flashAttr("detailsViewModel", announcementService.getAnnouncement(testAnnouncement.getId()))).
