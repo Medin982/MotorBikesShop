@@ -17,9 +17,6 @@ public class Images extends BaseEntity {
 
     @Transient
     public String getUrl() {
-//        TODO: If save image in project directory
-//        if (url == null || getId() == null) return null;
-//        return "/src/main/resources/static/images/announcement-photos/" + getId() + "/" + url;
         return url;
     }
 

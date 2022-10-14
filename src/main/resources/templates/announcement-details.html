@@ -246,7 +246,7 @@
     </form>
 </div>
 <div class="card-body text-danger font-weight-bold"
-     sec:sec:authorize="hasRole('ADMIN')">
+     sec:authorize="hasRole('ADMIN')">
     <form th:action="@{/announcement/delete/{id}(id = *{id})}"
           th:method="delete">
         <input type="submit" value="Delete">

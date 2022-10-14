@@ -33,7 +33,7 @@ public class EmailService {
             mimeMessageHelper.setFrom("motorBikeShop@mail.com");
             mimeMessageHelper.setTo(userEmail);
             mimeMessageHelper.setSubject("Welcome!");
-            mimeMessageHelper.setText(generateMessageContent(username, "userName", "email/registration"), true);
+            mimeMessageHelper.setText(generateMessageContent(username, "userName", "email/registrationEmail"), true);
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {
             throw new RuntimeException(e);

@@ -28,27 +28,6 @@ public class ImagesService {
     }
 
     public void createImages(List<MultipartFile> multipartFile, Announcement announcement) {
-//TODO:To save images in project directory.
-
-//        List<Images> imagesList = multipartFile.
-//                stream().
-//                map(img -> {
-//                    Images images = new Images();
-//                    String fileName = StringUtils.cleanPath(Objects.requireNonNull(img.getOriginalFilename()));
-//                    images.setUrl(fileName);
-//                    images.setAnnouncement(announcement);
-//                    Images savedImage = this.imagesRepository.save(images);
-//                    String uploadDir = "src/main/resources/static/images/announcement-photos/" + savedImage.getId();
-//                    try {
-//                        FileUploadUtilConfig.saveFile(uploadDir, fileName, img);
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    return images;
-//                }).toList();
-
-//TODO: To save image in cloudinary
-
         multipartFile.
                forEach(file -> {
                    try {
